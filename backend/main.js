@@ -16,8 +16,8 @@ const connection = mysql.createConnection({
     host:"localhost",
     user:"root",
     port: 3306,
-    password:"Rækkehus2023",
-    database:"student_cafe"
+    password:"Storpenisdreng1",
+    database:"student_cafe_portfolje6"
 });
 
 
@@ -135,7 +135,7 @@ app.post('/new/user',(req,res) => {
 
 
 
-// Oprette ny café //
+// Oprette ny cafe //
 app.post('/new/cafe', (req, res) => {
     // Get the data from the request body
     const cafeName = req.body.cafeName;
@@ -259,9 +259,27 @@ app.post('/New/rating',(req,res) => {
 })
 
 
+// victor
+app.get('/randomcafes', (req, res) => {
+    const limit = 5;
+
+    connection.query('SELECT * FROM cafes ORDER BY RAND() LIMIT ?', [limit],
+        (error, results, fields) => {
+        if (error) {
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+        res.send(results);
+    });
+});
+
+
+
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+
 
 

@@ -1,0 +1,102 @@
+[
+	{
+		"id" : 1,
+		"cafe_name" : "Café Nabo",
+		"address" : "Arne Jacobsens Allé 17",
+		"city" : "København",
+		"description" : "Vi er en nabocafe som elsker kaffe",
+		"wifi" : 1,
+		"serve_food" : 1,
+		"img_url" : "https://picsum.photos/2000"
+	},
+	{
+		"id" : 2,
+		"cafe_name" : "Riccos kaffebar",
+		"address" : "Sluseholmen 28",
+		"city" : "København",
+		"description" : "Kom og se hvor seje vi er",
+		"wifi" : 1,
+		"serve_food" : 0,
+		"img_url" : "https://picsum.photos/2000"
+	},
+	{
+		"id" : 3,
+		"cafe_name" : "The Living Room",
+		"address" : "Larsbjørnsstræde 17",
+		"city" : "København",
+		"description" : "kæmpe kaffe og kæmpe kærlighed",
+		"wifi" : 1,
+		"serve_food" : 1,
+		"img_url" : "https://picsum.photos/2000"
+	},
+	{
+		"id" : 4,
+		"cafe_name" : "Cafe Kaffeblomst",
+		"address" : "Vester Torv 14",
+		"city" : "Espergærde",
+		"description" : "Min bror holder mig fanget hjælp",
+		"wifi" : 0,
+		"serve_food" : 1,
+		"img_url" : "https://picsum.photos/2000"
+	},
+	{
+		"id" : 5,
+		"cafe_name" : "Halsnæs Bryghus",
+		"address" : "Norde Beddingsvej 35",
+		"city" : "Hundested",
+		"description" : "Her er vi næsvise hahahaha",
+		"wifi" : 0,
+		"serve_food" : 0,
+		"img_url" : "https://picsum.photos/2000"
+	},
+	{
+		"id" : 6,
+		"cafe_name" : "Café Dagmar",
+		"address" : "Nørregade 20A",
+		"city" : "Hundested",
+		"description" : "vow vow vow.",
+		"wifi" : 1,
+		"serve_food" : 1,
+		"img_url" : "https://picsum.photos/2000"
+	},
+	{
+		"id" : 7,
+		"cafe_name" : "Knæwr Kaffebar",
+		"address" : "Gerritsgade 21",
+		"city" : "Svendborg",
+		"description" : "Vi er alle pisse skæve men vores kage er ok",
+		"wifi" : 0,
+		"serve_food" : 1,
+		"img_url" : "https://picsum.photos/2000"
+	},
+	{
+		"id" : 8,
+		"cafe_name" : "Brød",
+		"address" : "Gerritsgade 18B",
+		"city" : "Svendborg",
+		"description" : "Vi har brød",
+		"wifi" : 1,
+		"serve_food" : 1,
+		"img_url" : "https://picsum.photos/2000"
+	},
+	{
+		"id" : 9,
+		"cafe_name" : "Frøken Friis",
+		"address" : "Nørregade 2",
+		"city" : "Kongens Lyngby",
+		"description" : "Vi brygger kaffe og sutter for samme pris",
+		"wifi" : 1,
+		"serve_food" : 0,
+		"img_url" : "https://picsum.photos/2000"
+	},
+	{
+		"id" : 10,
+		"cafe_name" : "Minas Kaffebar",
+		"address" : "Nørrebrogade 72",
+		"city" : "København",
+		"description" : "Vi har både kaffe og kage og mere kaffe tihi",
+		"wifi" : 0,
+		"serve_food" : 1,
+		"img_url" : "https://picsum.photos/2000"
+	}
+]
