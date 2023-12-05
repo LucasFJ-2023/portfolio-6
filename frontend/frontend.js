@@ -3,7 +3,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const cafeImagesContainer = document.getElementById('cafeImages');
 
-    fetch('/randomcafes')
+    fetch('/cafe/:id')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
