@@ -1,1 +1,7 @@
-#cafeDetails{ padding: 50%;}
+#cafeDetails{ margin-left: 10%}
+
+#cafeDetails h2 {font-size: 33px; padding: 5% 4% 1% 0}
+
+#cafeDetails img {max-width: 50%}
+
+#cafeImages img {max-width: 50%}
