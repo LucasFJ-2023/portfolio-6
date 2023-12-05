@@ -20,7 +20,6 @@
             })
             .then(cafeData => {
                 const cafeDetailsContainer = document.getElementById('cafeDetails');
-                if (cafeData && Array.isArray(cafeData) && cafeData.length > 0) {
                     const cafe = cafeData.find(cafe => cafe.id === cafeId);
                     if (cafe) {
                         cafeDetailsContainer.innerHTML = `
@@ -30,9 +29,7 @@
                         `;
                     } else {
                         console.error(`Cafe with ID ${cafeId} not found`);
-                    }
-                } else {
-                    console.error('Invalid cafe data or empty array');
+
                 }
             })
             .catch(error => {
