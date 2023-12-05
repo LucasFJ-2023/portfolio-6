@@ -135,7 +135,7 @@ app.post('/new/user',(req,res) => {
 
 
 
-// Oprette ny cafe //
+// Oprette ny café //
 app.post('/new/cafe', (req, res) => {
     // Get the data from the request body
     const cafeName = req.body.cafeName;
