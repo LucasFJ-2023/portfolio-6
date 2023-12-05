@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(cafes => {
-            // Iterate through the fetched cafes and display them
             cafes.forEach(cafe => {
                 const cafeElement = document.createElement('div');
                 cafeElement.innerHTML = `
