@@ -7,9 +7,38 @@
 </head>
 <body>
 <div id="cafeImages">
-
 </div>
 
+<section class="user">
+    <div class="log-in">
+        <input type="checkbox" id="already-user">
+        <label for="already-user">Log-in</label>
+
+        <div class="login-form" style="display: none;">
+            <input type="email" placeholder="Enter your email" id="login-email">
+            <input type="password" placeholder="Enter your password" id="login-password">
+            <button class="login-button">Log-in</button>
+        </div>
+    </div>
+
+    <div class="creat-user">
+        <input type="checkbox" id="new-user">
+        <label for="new-user">Create user</label>
+
+        <div class="register-form" style="display: none;">
+            <input type="firstName" placeholder="First name" id="register-firstName">
+            <input type="lastName" placeholder="Last name" id="register-lastName">
+            <input type="email" placeholder="Enter your email" id="register-email">
+            <input type="username" placeholder="Create a username" id="register-username">
+            <input type="password" placeholder="Create a password" id="register-password">
+            <button class="register-button">Create user</button>
+        </div>
+    </div>
+
+</section>
+
+
 <script src="frontend.js"></script>
+<script type="module" src="main.js"></script>
 </body>
 </html>

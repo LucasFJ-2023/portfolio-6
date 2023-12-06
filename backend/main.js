@@ -223,8 +223,8 @@ app.post('/New/comment',(req,res) => {
         'INSERT INTO `comments`(comment, cafe_id, user_id) values (?,?,?)',
         [comment, cafeId, userId],
         function (err, results) {
-            if (error) {
-                console.error(error);
+            if (err) {
+                console.error(err);
                 res.status(500).send('Internal Server Error');
                 return;
             }
@@ -248,8 +248,8 @@ app.post('/New/rating',(req,res) => {
         'INSERT INTO `ratings`(rating, user_id ,cafe_id) values (?,?,?)',
         [rating, cafeId, userId],
         function (err, results) {
-            if (error) {
-                console.error(error);
+            if (err) {
+                console.error(err);
                 res.status(500).send('Internal Server Error');
                 return;
             }
