@@ -3,12 +3,25 @@
     background-color: #E29282;
 }
 
+h1 {
+    margin-left: 20px;
+}
+
+hr.solid {
+    border-top: 4px solid navajowhite;
+    margin-right: 520px;
+
+}
+
+h3 {
+    text-align: center;
+}
+
 section.user {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .log-in, .creat-user {
@@ -55,9 +68,4 @@ button {
     border: none;
     cursor: pointer;
     font-size: 16px;
-}
-
-
-h1 {
-
 }
