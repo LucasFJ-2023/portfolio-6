@@ -31,3 +31,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+if (userLogginIn) {login = hidden}
+if (!userLogginIn) {login = block}
