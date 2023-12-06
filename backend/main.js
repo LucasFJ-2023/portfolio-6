@@ -3,6 +3,7 @@ const express = require("express");
 const mysql = require("mysql2");
 //npm install cors --save
 const cors = require("cors");
+require('dotenv').config();
 
 const app = express();
 const port = 3000;
@@ -16,7 +17,7 @@ const connection = mysql.createConnection({
     host:"localhost",
     user:"root",
     port: 3306,
-    password:"Storpenisdreng1",
+    password: process.env.MYSQL_PASSWORD,
     database:"student_cafe_portfolje6"
 });
 
