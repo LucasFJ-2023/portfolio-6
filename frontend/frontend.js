@@ -51,3 +51,26 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error fetching cafe details:', error);
         });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetch(`http://localhost:3000/cafe/`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch');
+            }
+            return response.json();
+        })
+        .then(cafe => {
+            const cafeImageContainer = document.getElementById('cafeImageContainer');
+            const cafeInformationContainer = document.getElementById('cafeInformationContainer');
+
+            if (cafe) {
+                cafeImageContainer.innerHTML = `<img src="${cafe[0].img_url}">`;
+                cafeInformationContainer.innerHTML = `<h2>${cafe[0].cafe_name}</h2> <p>Address: ${cafe[0].address}, ${cafe[0].city}</p><p>Description: ${cafe[0].description}</p>`;
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching cafe details:', error);
+        });
+});
+src=""

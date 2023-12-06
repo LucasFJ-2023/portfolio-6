@@ -61,12 +61,22 @@ margin-top: 85%;
 
 
 .main-section {
-    height: 700px;
-    background-image: url("https://picsum.photos/2000");
-    opacity: 50%;
+
+    width: 100%;
     padding: 10%;
+    background-image: url('./img/cafe_section.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
 }
 
+
+.main-section #cafe-features{
+    background: white;
+    padding: 5%;
+}
+
+.icon {width:15%}
 /* mobile */
 @media only screen and (max-width: 600px) {
     #cafeWrapper {
@@ -75,11 +85,44 @@ margin-top: 85%;
 
     #cafeImageContainer {
         max-width: 100%;
-        float: none;
     }
 
     #cafeInformationContainer {
         max-width: 100%;
-        float: none;
+        width: 100%;
+        margin: 0;
+       padding: 1rem 0 5rem 4rem;
+
+    }
+
+
+    #cafeWrapper img {
+        max-width: 100%;
+        margin-bottom: 30px;
+    }
+
+
+    #cafeInformationContainer p{
+
+    }
+    #cafeInformationContainer h2  {
+        margin-bottom: 1rem;
+        margin-top: 0;
+    }
+
+
+    .main-section {
+        width: 100%;
+        padding: 10%;
+        background-image: url('./img/cafe_section.jpeg');
+        background-size: cover;
+        background-position: center;
+        background-blend-mode: multiply;
+    }
+
+
+    .main-section #cafe-features{
+        background: white;
+        padding: 5%;
     }
 }
