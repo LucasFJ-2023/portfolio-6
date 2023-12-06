@@ -1,9 +1,128 @@
-#cafeDetails{ margin-left: 10%}
+/* General rules */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-#cafeDetails h2 {font-size: 33px; padding: 5% 4% 1% 0}
+body {
+    font-family: Arial, sans-serif;
+    font-size: 22px;
+    line-height: 1.3;
+}
 
-#cafeDetails img {max-width: 50%}
+h1, h2, h3, h4, h5, h6 {
+    line-height: 0.8;
+}
 
-#cafeImages { margin-left: 5%}
+p {
+    font-size: 16px;
+}
 
-#cafeImages img {max-width: 50%}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul, ol {
+    list-style: none;
+    padding-left: 0;
+}
+
+/* Specific cafe rules */
+#cafeWrapper {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+}
+
+#cafeImageContainer {
+    max-width: 50%;
+    float: right;
+    display: flex;
+}
+
+#cafeWrapper img {
+    max-width: 100%;
+}
+
+#cafeInformationContainer {
+    max-width: 49%;
+    float: right;
+    margin-left: 12%;
+}
+#cafeInformationContainer p{
+
+}
+#cafeInformationContainer h2  {
+margin-bottom: 1rem;
+margin-top: 85%;
+}
+
+
+.main-section {
+
+    width: 100%;
+    padding: 10%;
+    background-image: url('./img/cafe_section.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+}
+
+
+.main-section #cafe-features{
+    background: white;
+    padding: 5%;
+}
+
+.icon {width:15%}
+/* mobile */
+@media only screen and (max-width: 600px) {
+    #cafeWrapper {
+        flex-direction: column;
+    }
+
+    #cafeImageContainer {
+        max-width: 100%;
+    }
+
+    #cafeInformationContainer {
+        max-width: 100%;
+        width: 100%;
+        margin: 0;
+       padding: 1rem 0 5rem 4rem;
+
+    }
+
+
+    #cafeWrapper img {
+        max-width: 100%;
+        margin-bottom: 30px;
+    }
+
+
+    #cafeInformationContainer p{
+
+    }
+    #cafeInformationContainer h2  {
+        margin-bottom: 1rem;
+        margin-top: 0;
+    }
+
+
+    .main-section {
+        width: 100%;
+        padding: 10%;
+        background-image: url('./img/cafe_section.jpeg');
+        background-size: cover;
+        background-position: center;
+        background-blend-mode: multiply;
+    }
+
+
+    .main-section #cafe-features{
+        background: white;
+        padding: 5%;
+    }
+}
