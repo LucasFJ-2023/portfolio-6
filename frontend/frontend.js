@@ -1,5 +1,5 @@
 
-// victor
+// victor - Få 5 tilfældige cafeer
 document.addEventListener('DOMContentLoaded', () => {
     const cafeImagesContainer = document.getElementById('cafeImages');
     fetch('http://localhost:3000/randomcafes')
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 });
 
-
+// Få fat i en specific cafe
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const cafeId = urlParams.get('id');
@@ -39,15 +39,12 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(cafe => {
-            const cafeDetailsContainer = document.getElementById('cafeDetails');
-            if (cafe) {
-                cafeDetailsContainer.innerHTML = `
-                        <img src="${cafe[0].img_url}">
-                        <h2>${cafe[0].cafe_name}</h2>
-                        <p>Address: ${cafe[0].address}, ${cafe[0].city}</p>
-                        <p>Description: ${cafe[0].description}</p>
+            const cafeImageContainer = document.getElementById('cafeImageContainer');
+            const cafeInformationContainer = document.getElementById('cafeInformationContainer');
 
-                    `;
+            if (cafe) {
+                cafeImageContainer.innerHTML = `<img src="${cafe[0].img_url}">`;
+                cafeInformationContainer.innerHTML = `<h2>${cafe[0].cafe_name}</h2> <p>Address: ${cafe[0].address}, ${cafe[0].city}</p><p>Description: ${cafe[0].description}</p>`;
             }
         })
         .catch(error => {
