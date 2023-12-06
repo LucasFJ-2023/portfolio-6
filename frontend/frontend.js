@@ -28,8 +28,29 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const cafeId = urlParams.get('id');
+    fetch(`http://localhost:3000/cafe/${cafeId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch');
+            }
+            return response.json();
+        })
+        .then(cafe => {
+            const cafeDetailsContainer = document.getElementById('cafeDetails');
+            if (cafe) {
+                cafeDetailsContainer.innerHTML = `
+                        <img src="${cafe[0].img_url}">
+                        <h2>${cafe[0].cafe_name}</h2>
+                        <p>Address: ${cafe[0].address}, ${cafe[0].city}</p>
+                        <p>Description: ${cafe[0].description}</p>
 
-
-
-if (userLogginIn) {login = hidden}
-if (!userLogginIn) {login = block}
+                    `;
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching cafe details:', error);
+        });
+});
