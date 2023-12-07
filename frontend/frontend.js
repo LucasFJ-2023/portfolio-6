@@ -28,7 +28,7 @@ const registerCafeButton = document.querySelector(".register-button")
 // victor - LAV OM TIL ALLE CAFEER
 document.addEventListener('DOMContentLoaded', () => {
     const cafeImagesContainer = document.getElementById('cafeImages');
-    fetch('http://localhost:3000/randomcafes')
+    fetch('http://localhost:3000/all/cafes')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Not ok');
@@ -37,22 +37,31 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(cafes => {
             cafes.forEach(cafe => {
-                const cafeElement = document.createElement('div');
-                cafeElement.innerHTML = `
-                    <img src="${cafe.img_url}">
+                const cafeDiv = document.createElement('div');
+                const cafeImage = document.createElement('img');
+                cafeImage.src = cafe.img_url;
+                cafeImage.alt = cafe.cafe_name;
+                cafeImage.classList.add('cafe-image');
+
+                const cafeDetails = document.createElement('div');
+                cafeDetails.innerHTML = `
                     <h3>${cafe.cafe_name}</h3>
                     <p>Address: ${cafe.address}, ${cafe.city}</p>
                     <p>Description: ${cafe.description}</p>
-                    
                 `;
-                cafeImagesContainer.appendChild(cafeElement);
+                cafeDetails.classList.add('cafe-details');
+
+                cafeDiv.classList.add('cafe-container');
+                cafeDiv.appendChild(cafeImage);
+                cafeDiv.appendChild(cafeDetails);
+                cafeImagesContainer.appendChild(cafeDiv);
             });
         })
         .catch(error => {
             console.error('cant fetch cafes:', error);
         });
 });
-
+// Victor
 // Få fat i en specific cafe
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -67,12 +76,14 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(cafe => {
             const cafeImageContainer = document.querySelector('#cafeImageContainer');
             const cafeInformationContainer = document.querySelector('#cafeInformationContainer');
+            const cafeDescriptionContainer = document.querySelector('.cafe-description');
             const wifiImage = document.querySelector('.true-or-false-wifi');
             const foodImage = document.querySelector('.true-or-false-food');
 
             if (cafe) {
                 cafeImageContainer.innerHTML = `<img src="${cafe[0].img_url}">`;
-                cafeInformationContainer.innerHTML = `<h2>${cafe[0].cafe_name}</h2> <p>Address: ${cafe[0].address}, ${cafe[0].city}</p><p>Description: ${cafe[0].description}</p>`;
+                cafeInformationContainer.innerHTML = `<h2>${cafe[0].cafe_name}</h2> <p>Address: ${cafe[0].address}, ${cafe[0].city}</p><p>${cafe[0].description}</p>`;
+                cafeDescriptionContainer.innerHTML = ``;
                 wifiImage.src = cafe[0].wifi ? './img/istrue.png' : './img/isfalse.png';
                 foodImage.src = cafe[0].serve_food ? './img/istrue.png' : './img/isfalse.png';
             }
@@ -270,3 +281,34 @@ registerCafeCheckbox.addEventListener('change', function () {
         registerCafeForm.style.display = 'none'; // Hide the café registration form
     }
 });
+
+
+// Victor
+// google maps
+// Initialize and add the map
+let map;
+
+async function initMap() {
+    // The location of Uluru
+    const position = { lat: -25.344, lng: 131.031 };
+    // Request needed libraries.
+    //@ts-ignore
+    const { Map } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+    // The map, centered at Uluru
+    map = new Map(document.getElementById("map"), {
+        zoom: 4,
+        center: position,
+        mapId: "DEMO_MAP_ID",
+    });
+
+    // The marker, positioned at Uluru
+    const marker = new AdvancedMarkerElement({
+        map: map,
+        position: position,
+        title: "Uluru",
+    });
+}
+
+initMap();
