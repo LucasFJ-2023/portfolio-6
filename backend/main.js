@@ -17,8 +17,8 @@ const connection = mysql.createConnection({
     host:"localhost",
     user:"root",
     port: 3306,
-    password: "Rækkehus2023",
-    database:"student_cafe"
+    password: "Storpenisdreng1",
+    database:"student_cafe_portfolje6"
 });
 
 
@@ -269,10 +269,10 @@ app.post('/New/rating',(req,res) => {
     )
 })
 
-
+// Vis x mængde cafer tilfældigt
 // victor
-app.get('/randomcafes', (req, res) => {
-    const limit = 5;
+app.get('/all/cafes', (req, res) => {
+    const limit = 6;
 
     connection.query('SELECT * FROM cafes ORDER BY RAND() LIMIT ?', [limit],
         (error, results, fields) => {

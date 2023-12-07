@@ -8,11 +8,11 @@
 body {
     font-family: Arial, sans-serif;
     font-size: 22px;
-    line-height: 1.3;
+
 }
 
 h1, h2, h3, h4, h5, h6 {
-    line-height: 0.8;
+
 }
 
 p {
@@ -37,9 +37,11 @@ ul, ol {
 }
 
 #cafeImageContainer {
-    max-width: 50%;
+    max-width: 40%;
     float: right;
     display: flex;
+    margin-left: 5%;
+    margin-top: 50px;
 }
 
 #cafeWrapper img {
@@ -47,7 +49,7 @@ ul, ol {
 }
 
 #cafeInformationContainer {
-    max-width: 49%;
+    max-width: 40%;
     float: right;
     margin-left: 12%;
 }
@@ -56,27 +58,37 @@ ul, ol {
 }
 #cafeInformationContainer h2  {
 margin-bottom: 1rem;
-margin-top: 85%;
+margin-top: 55%;
 }
 
 
-.main-section {
-
-    width: 100%;
-    padding: 10%;
-    background-image: url('./img/cafe_section.jpeg');
-    background-size: cover;
-    background-position: center;
-    background-blend-mode: multiply;
-}
 
 
-.main-section #cafe-features{
+
+.cafe-features{
     background: white;
     padding: 5%;
+    height: 600px;
+
 }
 
-.icon {width:15%}
+.cafe-features .cafe-features-child {
+    float: left;
+    margin-top: 3%
+}
+
+.icon {width:15%;
+    display: block;
+    float: left;
+padding-top: 2%;
+margin-right: 10%;
+}
+
+.true-or-false-wifi, .true-or-false-food{
+    width:13%;
+    padding: 20px 0 20px 0;
+    float: left;
+}
 /* mobile */
 @media only screen and (max-width: 600px) {
     #cafeWrapper {
@@ -126,3 +138,38 @@ margin-top: 85%;
         padding: 5%;
     }
 }
+
+
+
+
+#cafeImages {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cafe-container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0 0 2% ;
+    padding: 10px;
+    width: 30%;
+
+
+
+}
+
+.cafe-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.cafe-details h3 {
+    margin-bottom: 5px;
+}
+
+.cafe-details p {
+    margin-bottom: 8px;
+}
+
+
