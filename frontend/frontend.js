@@ -1,5 +1,5 @@
 
-// victor - Få 5 tilfældige cafeer
+// victor - LAV OM TIL ALLE CAFEER
 document.addEventListener('DOMContentLoaded', () => {
     const cafeImagesContainer = document.getElementById('cafeImages');
     fetch('http://localhost:3000/randomcafes')
@@ -39,8 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(cafe => {
-            const cafeImageContainer = document.getElementById('cafeImageContainer');
-            const cafeInformationContainer = document.getElementById('cafeInformationContainer');
+            const cafeImageContainer = document.querySelector('#cafeImageContainer');
+            const cafeInformationContainer = document.querySelector('#cafeInformationContainer');
             const wifiImage = document.querySelector('.true-or-false-wifi');
             const foodImage = document.querySelector('.true-or-false-food');
 
