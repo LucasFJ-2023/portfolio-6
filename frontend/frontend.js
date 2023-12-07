@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // Forside til login og registrere bruger.
-//Lucas & Kasper
+//Lucas
 registerButton.addEventListener("click", () => {
     let firstName = firstNameInputField.value;
     let lastName = lastNameInputField.value;
@@ -122,7 +122,7 @@ registerButton.addEventListener("click", () => {
 
 
 
-// Lucas & Kasper
+// Lucas
 // How to login
 loginButton.addEventListener("click",() => {
     let email = emailLogin.value;
