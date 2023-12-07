@@ -157,7 +157,7 @@ registerCafeButton.addEventListener("click", () => {
     let comment = commentInputField.value;
     let rating = ratingInputField
 
-    // Create an object with user data -- SKAL LAVES FÆRDIG SÅ DEN PASSER MED MAIN.JS OG SQL // LUCAS
+    // Create an object with user data -- SKAL LAVES FÆRDIG SÅ DEN PASSER MED MAIN.JS OG SQL // LUCAS.
     const userData = {
         cafeName: cafeName,
         address: address,
