@@ -1,3 +1,15 @@
+const firstNameInputField = document.getElementById('register-firstName');
+const lastNameInputField = document.getElementById('register-lastName');
+const emailInputField = document.getElementById('register-email');
+const passwordInputField = document.getElementById('register-password');
+const usernameInputField = document.getElementById('register-username');
+const locationInputField = document.getElementById('register-location')
+const registerButton = document.querySelector(".register-button")
+
+const emailLogin = document.getElementById('login-email');
+const passwordLogin = document.getElementById('login-password');
+const loginButton = document.querySelector(".login-button")
+
 
 // victor - LAV OM TIL ALLE CAFEER
 document.addEventListener('DOMContentLoaded', () => {
@@ -58,3 +70,111 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+
+
+
+// Forside til login og registrere bruger.
+//Lucas & Kasper
+registerButton.addEventListener("click", () => {
+    let firstName = firstNameInputField.value;
+    let lastName = lastNameInputField.value;
+    let username = usernameInputField.value;
+    let email = emailInputField.value;
+    let location = locationInputField.value;
+    let password = passwordInputField.value;
+
+    // Create an object with user data
+    const userData = {
+        firstName: firstName,
+        lastName: lastName,
+        username: username,
+        email: email,
+        location: location,
+        password: password
+    };
+
+    // Send a POST request to your server
+    fetch('http://localhost:3000/new/user', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+    })
+        .then(response => response.json())
+        .then(data => {
+            // Handle the response data as needed
+            console.log("User registered:", data);
+        })
+        .catch(error => {
+            if (error.status === 400 && error.message === "User Already Exists") {
+                alert("User Already Exists");
+            } else if (error.status === 400 && error.message === "Password is not valid") {
+                alert("Password is not valid");
+            } else {
+                console.error(error.message);
+            }
+        });
+});
+
+
+
+
+
+
+// Lucas & Kasper
+// How to login
+loginButton.addEventListener("click",() => {
+    let email = emailLogin.value;
+    let password = passwordLogin.value;
+    fetch('http:localhost:3000/user')
+        .then((response) => {
+            // User logged in successfully
+            console.log("User logged in:", userCredential.user);
+
+            window.location.href = 'forside.html'; //Brugere bliver videresendt til næste side (forside.html)
+        })
+        .catch((error) => {
+            if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password") {
+                alert("Invalid email or password");
+            } else {
+                console.error(error.message);
+            }
+        });
+});
+
+
+
+
+
+//Lucas
+// This function executes when the DOM content is fully loaded and ready to be manipulated
+document.addEventListener('DOMContentLoaded', function() {
+    // Get elements related to the login functionality
+    const loginCheckbox = document.getElementById('already-user'); // Get the "Log-in" checkbox
+    const loginForm = document.querySelector('.login-form'); // Get the login form
+
+    // Toggle display of login form based on checkbox change
+    loginCheckbox.addEventListener('change', function() {
+        if (loginCheckbox.checked) {
+            loginForm.style.display = 'block'; // Display the login form
+        } else {
+            loginForm.style.display = 'none'; // Hide the login form
+        }
+    });
+
+
+
+    // Get elements related to the registration functionality
+    const registerCheckbox = document.getElementById('new-user'); // Get the "Create user" checkbox
+    const registerForm = document.querySelector('.register-form'); // Get the registration form
+
+    // Toggle display of register form based on checkbox change
+    registerCheckbox.addEventListener('change', function() {
+        if (registerCheckbox.checked) {
+            registerForm.style.display = 'block'; // Display the registration form
+        } else {
+            registerForm.style.display = 'none'; // Hide the registration form
+        }
+    })
+});
