@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="indexstyle.css">
+</head>
+<body>
+<div id="cafeImages">
+</div>
+
+<h1>Café Locator: Your Guide To Nearby Café Gems <img src="../img/kaffebønne.png" height="65" width="70"><img/></h1>
+
+<hr class="solid">
+
+<h3> Create A User And Login, To Find Your New Spot To Do Your Work ! </h3>
+
+<section class="user">
+    <div class="log-in">
+        <input type="checkbox" id="already-user">
+        <label for="already-user">Log-in</label>
+
+        <div class="login-form" style="display: none;">
+            <ul>
+                <li>
+                    <input type="email" placeholder="Enter your email" id="login-email">
+                </li>
+                <li>
+                    <input type="password" placeholder="Enter your password" id="login-password">
+                </li>
+                <li>
+                    <button class="login-button">Log-in</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="creat-user">
+        <input type="checkbox" id="new-user">
+        <label for="new-user">Create user</label>
+
+        <div class="register-form" style="display: none;">
+            <ul>
+                <li>
+                    <input type="firstName" placeholder="First name" id="register-firstName">
+                </li>
+                <li>
+                    <input type="lastName" placeholder="Last name" id="register-lastName">
+                </li>
+                <li>
+                    <input type="email" placeholder="Enter your email" id="register-email">
+                </li>
+                <li>
+                    <input type="username" placeholder="Create a username" id="register-username">
+                </li>
+                <li>
+                    <input type="password" placeholder="Create a password" id="register-password">
+                </li>
+                <li>
+                    <button class="register-button">Create user</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</section>
+
+
+<script src="frontend.js"></script>
+<script type="module" src="main.js"></script>
+</body>
+</html>
