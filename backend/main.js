@@ -38,18 +38,27 @@ app.get('/cafes', (req, res) => {
 
 
 
-// Returnere alle users //
-app.get('/user', (req, res) => {
-    connection.query('SELECT * FROM users', (error, results, fields) => {
+
+//Så user kan logge ind
+app.post('/user/login', (req, res) => {
+    const { email, password } = req.body;
+
+    connection.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], (error, results, fields) => {
         if (error) {
             console.error(error);
             res.status(500).send('Internal Server Error');
             return;
         }
-        res.send(results);
+
+        if (results.length > 0) {
+            // User found, respond with user data
+            res.json(results[0]);
+        } else {
+            // No matching user found, respond with an error
+            res.status(401).json({ error: "Invalid email or password" });
+        }
     });
 });
-
 
 
 

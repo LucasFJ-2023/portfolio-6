@@ -1,3 +1,4 @@
+//Lucas
 const firstNameInputField = document.getElementById('register-firstName');
 const lastNameInputField = document.getElementById('register-lastName');
 const emailInputField = document.getElementById('register-email');
@@ -101,11 +102,13 @@ registerButton.addEventListener("click", () => {
         },
         body: JSON.stringify(userData)
     })
+        //Handle server response
         .then(response => response.json())
         .then(data => {
             // Handle the response data as needed
             console.log("User registered:", data);
         })
+        //Error handling
         .catch(error => {
             if (error.status === 400 && error.message === "User Already Exists") {
                 alert("User Already Exists");
@@ -124,24 +127,38 @@ registerButton.addEventListener("click", () => {
 
 // Lucas
 // How to login
-loginButton.addEventListener("click",() => {
+loginButton.addEventListener("click", () => {
     let email = emailLogin.value;
     let password = passwordLogin.value;
-    fetch('http:localhost:3000/user')
-        .then((response) => {
-            // User logged in successfully
-            console.log("User logged in:", userCredential.user);
 
-            window.location.href = 'forside.html'; //Brugere bliver videresendt til næste side (forside.html)
+    // Send a request to your server for user authentication
+    fetch('http://localhost:3000/user/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }), // Send email and password in the request body
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Invalid email or password");
+            }
+            // The server sends back user data upon successful login
+            return response.json();
+        })
+        .then((userData) => {
+            // User logged in successfully
+            console.log("User logged in:", userData);
+
+            // Redirect users to the next page (forside.html)
+            window.location.href = 'forside.html';
         })
         .catch((error) => {
-            if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password") {
-                alert("Invalid email or password");
-            } else {
-                console.error(error.message);
-            }
+            console.error(error.message);
+            alert("Invalid email or password");
         });
 });
+
 
 
 
