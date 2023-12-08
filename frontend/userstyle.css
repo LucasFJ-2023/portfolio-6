@@ -1,0 +1,143 @@
+/* General rules */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 22px;
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+
+}
+
+p {
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul, ol {
+    list-style: none;
+    padding-left: 0;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+
+.nav-container {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+}
+
+nav {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    position: fixed;
+    background: white;
+    margin-left: 1%;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 50px;
+    margin-right: 35px;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.profile {
+    width: 100px;
+    margin-left: 5%;
+}
+
+/* chatgpt searchbar starter */
+.search-container {
+    position: relative;
+}
+
+.search-input {
+    width: 300px;
+    padding: 15px;
+    background-color: white;
+    border: 2px solid black;
+    color: #111;
+    font-size: 15px;
+    box-shadow: 3px 1px 0px 2px, 0px -1px 0px 2px rgba(0, 0, 0, 0.62);
+    height: 58px;
+    transform: skew(-2deg, 1deg);
+    font-family: 'arial', cursive;
+}
+
+.search-char {
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: transparent;
+    transition: 500ms ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.search-chars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    visibility: hidden;
+}
+
+.s-char::before {
+    content: 's';
+    transition-delay: 200ms;
+}
+
+.e-char::before {
+    content: 'e';
+    left: 12px;
+    color: #666;
+    transition-delay: 400ms;
+}
+
+/* chatgpt searchbar slutter */
+
+
+
+
+
