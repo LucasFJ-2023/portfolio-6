@@ -1,4 +1,5 @@
 //Lucas
+//Create user
 const firstNameInputField = document.getElementById('register-firstName');
 const lastNameInputField = document.getElementById('register-lastName');
 const emailInputField = document.getElementById('register-email');
@@ -7,9 +8,21 @@ const usernameInputField = document.getElementById('register-username');
 const locationInputField = document.getElementById('register-location')
 const registerButton = document.querySelector(".register-button")
 
+//Login
 const emailLogin = document.getElementById('login-email');
 const passwordLogin = document.getElementById('login-password');
 const loginButton = document.querySelector(".login-button")
+
+//Create a new café
+const cafeNameInputField = document.getElementById('register-cafeName');
+const addressInputField = document.getElementById('register-addressName');
+const cityInputField = document.getElementById('register-city');
+const descriptionInputField = document.getElementById('register-description');
+const wifiInputField = document.getElementById('register-wifi');
+const serveFoodInputField = document.getElementById('register-serveFood')
+const commentInputField = document.getElementById('register-comment')
+const ratingInputField = document.getElementById('register-rating')
+const registerCafeButton = document.querySelector(".register-button")
 
 
 // victor - LAV OM TIL ALLE CAFEER
@@ -132,7 +145,52 @@ registerButton.addEventListener("click", () => {
 });
 
 
+//Lucas
+//Create a new Café
+registerCafeButton.addEventListener("click", () => {
+    let cafeName = cafeNameInputField.value;
+    let address = addressInputField.value;
+    let city = cityInputField.value;
+    let description = descriptionInputField.value;
+    let wifi = wifiInputField.value;
+    let serveFood = serveFoodInputField.value;
+    let comment = commentInputField.value;
+    let rating = ratingInputField
 
+    // Create an object with user data -- SKAL LAVES FÆRDIG SÅ DEN PASSER MED MAIN.JS OG SQL // LUCAS.
+    const userData = {
+        cafeName: cafeName,
+        address: address,
+        city: city,
+        description: description,
+        wifi: wifi,
+        serveFood: serveFood,
+        comment: comment,
+        rating: rating
+    };
+
+    // Send a POST request to your server
+    fetch('http://localhost:3000/new/cafe', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+    })
+        //Handle server response
+        .then(response => response.json())
+        .then(data => {
+            // Handle the response data as needed
+            console.log("Cafe registered:", data);
+        })
+        //Error handling
+        .catch(error => {
+            if (error.status === 400 && error.message === "Cafe Already Exists") {
+                alert("Cafe Already Exists");
+                console.error(error.message);
+            }
+        });
+});
 
 
 
@@ -205,6 +263,23 @@ document.addEventListener('DOMContentLoaded', function() {
             registerForm.style.display = 'none'; // Hide the registration form
         }
     })
+});
+
+
+
+
+// Get elements related to the registration functionality
+const registerCafeCheckbox = document.getElementById('new-cafe'); // Get the "Create new café" checkbox
+const registerCafeForm = document.querySelector('.registerCafe-form'); // Get the café registration form
+
+
+// Toggle display of café register form based on checkbox change
+registerCafeCheckbox.addEventListener('change', function () {
+    if (registerCafeCheckbox.checked) {
+        registerCafeForm.style.display = 'block'; // Display the café registration form
+    } else {
+        registerCafeForm.style.display = 'none'; // Hide the café registration form
+    }
 });
 
 

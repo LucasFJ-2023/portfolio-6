@@ -38,7 +38,7 @@ app.get('/cafes', (req, res) => {
 
 
 
-
+//Lucas
 //Så user kan logge ind
 app.post('/user/login', (req, res) => {
     const { email, password } = req.body;
@@ -118,7 +118,7 @@ app.get('/cafes/search', (req,res)=>{
 
 
 
-
+//Lucas
 // Oprette ny bruger //
 app.post('/new/user',(req,res) => {
 
