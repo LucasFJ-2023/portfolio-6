@@ -15,14 +15,12 @@ const loginButton = document.querySelector(".login-button")
 
 //Create a new café
 const cafeNameInputField = document.getElementById('register-cafeName');
-const addressInputField = document.getElementById('register-addressName');
+const addressInputField = document.getElementById('register-address');
 const cityInputField = document.getElementById('register-city');
 const descriptionInputField = document.getElementById('register-description');
 const wifiInputField = document.getElementById('register-wifi');
-const serveFoodInputField = document.getElementById('register-serveFood')
-const commentInputField = document.getElementById('register-comment')
-const ratingInputField = document.getElementById('register-rating')
-const registerCafeButton = document.querySelector(".register-button")
+const serveFoodInputField = document.getElementById('register-serveFood');
+const registerCafeButton = document.querySelector(".registerCafe-button");
 
 
 // victor - LAV OM TIL ALLE CAFEER
@@ -89,8 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
         })
-        .catch(error => {
-            console.error('Error fetching cafe details:', error);
+        .catch(err => {
+            console.error('Error fetching cafe details:', err);
         });
 });
 
@@ -154,10 +152,8 @@ registerCafeButton.addEventListener("click", () => {
     let description = descriptionInputField.value;
     let wifi = wifiInputField.value;
     let serveFood = serveFoodInputField.value;
-    let comment = commentInputField.value;
-    let rating = ratingInputField
 
-    // Create an object with user data -- SKAL LAVES FÆRDIG SÅ DEN PASSER MED MAIN.JS OG SQL // LUCAS.
+    // Create an object with user data
     const userData = {
         cafeName: cafeName,
         address: address,
@@ -165,8 +161,6 @@ registerCafeButton.addEventListener("click", () => {
         description: description,
         wifi: wifi,
         serveFood: serveFood,
-        comment: comment,
-        rating: rating
     };
 
     // Send a POST request to your server
@@ -231,8 +225,6 @@ loginButton.addEventListener("click", () => {
 
 
 
-
-
 //Lucas
 // This function executes when the DOM content is fully loaded and ready to be manipulated
 document.addEventListener('DOMContentLoaded', function() {
@@ -267,7 +259,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
 // Get elements related to the registration functionality
 const registerCafeCheckbox = document.getElementById('new-cafe'); // Get the "Create new café" checkbox
 const registerCafeForm = document.querySelector('.registerCafe-form'); // Get the café registration form
@@ -281,6 +272,8 @@ registerCafeCheckbox.addEventListener('change', function () {
         registerCafeForm.style.display = 'none'; // Hide the café registration form
     }
 });
+
+
 
 
 // Victor
