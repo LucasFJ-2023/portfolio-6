@@ -17,8 +17,8 @@ const connection = mysql.createConnection({
     host:"localhost",
     user:"root",
     port: 3306,
-    password: "Storpenisdreng1",
-    database:"student_cafe_portfolje6"
+    password: "Rækkehus2023",
+    database:"student_cafe"
 });
 
 
@@ -159,7 +159,7 @@ app.post('/new/cafe', (req, res) => {
     connection.query(
         'INSERT INTO `cafes`(cafe_name, address, city, description, wifi, serve_food) VALUES (?, ?, ?, ?, ?, ?)',
         [cafeName, address, city, description, wifi, serveFood],
-        function (err, results) {  // Corrected variable name from 'error' to 'err'
+        function (err, results) {
             if (err) {
                 console.error(err);
                 res.status(500).send('Internal Server Error');
