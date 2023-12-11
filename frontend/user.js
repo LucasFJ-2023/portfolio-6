@@ -32,3 +32,39 @@ function getUserInfo() {
 }
 
 document.querySelector('.getUserInfo').addEventListener('click', getUserInfo);
+
+document.addEventListener('DOMContentLoaded', () => {
+    const cafeImagesContainer = document.getElementById('cafeImages');
+    fetch('http://localhost:3000/all/cafes')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Not ok');
+            }
+            return response.json();
+        })
+        .then(cafes => {
+            cafes.forEach(cafe => {
+                const cafeDiv = document.createElement('div');
+                const cafeImage = document.createElement('img');
+                cafeImage.src = cafe.img_url;
+                cafeImage.alt = cafe.cafe_name;
+                cafeImage.classList.add('cafe-image');
+
+                const cafeDetails = document.createElement('div');
+                cafeDetails.innerHTML = `
+                    <h3>${cafe.cafe_name}</h3>
+                    <p>Address: ${cafe.address}, ${cafe.city}</p>
+                    <p>Description: ${cafe.description}</p>
+                `;
+                cafeDetails.classList.add('cafe-details');
+
+                cafeDiv.classList.add('cafe-container');
+                cafeDiv.appendChild(cafeImage);
+                cafeDiv.appendChild(cafeDetails);
+                cafeImagesContainer.appendChild(cafeDiv);
+            });
+        })
+        .catch(error => {
+            console.error('cant fetch cafes:', error);
+        });
+});
