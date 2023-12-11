@@ -24,9 +24,9 @@ const registerCafeButton = document.querySelector(".registerCafe-button");
 
 
 
-// victor - LAV OM TIL ALLE CAFEER
+// victor - Display all cafes in HTML #cafeImages
 document.addEventListener('DOMContentLoaded', () => {
-    const cafeImagesContainer = document.getElementById('cafeImages');
+    const cafeImagesContainer = document.querySelector('#cafeImages');
     fetch('http://localhost:3000/all/cafes')
         .then(response => {
             if (!response.ok) {
@@ -35,9 +35,24 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(cafes => {
-            cafes.forEach(cafe => {
+            let rowDiv = document.createElement('div');
+            rowDiv.classList.add('row');
+            cafeImagesContainer.appendChild(rowDiv);
+
+            cafes.forEach((cafe, index) => {
+                if (index > 0 && index % 3 === 0) {
+                    rowDiv = document.createElement('div');
+                    rowDiv.classList.add('row');
+                    cafeImagesContainer.appendChild(rowDiv);
+                }
+
+                const cafeLink = document.createElement('a');
                 const cafeDiv = document.createElement('div');
                 const cafeImage = document.createElement('img');
+
+                cafeLink.href = `cafe.html?cafeId=${cafe.id}`;
+                cafeLink.classList.add('cafe-link');
+
                 cafeImage.src = cafe.img_url;
                 cafeImage.alt = cafe.cafe_name;
                 cafeImage.classList.add('cafe-image');
@@ -53,18 +68,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 cafeDiv.classList.add('cafe-container');
                 cafeDiv.appendChild(cafeImage);
                 cafeDiv.appendChild(cafeDetails);
-                cafeImagesContainer.appendChild(cafeDiv);
+
+                cafeLink.appendChild(cafeDiv); // Append the whole structure to the link
+                rowDiv.appendChild(cafeLink); // Append the link to the row
             });
         })
         .catch(error => {
-            console.error('cant fetch cafes:', error);
+            console.error('Error fetching cafes:', error);
         });
 });
+
+
+
 // Victor
 // Få fat i en specific cafe
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
-    const cafeId = urlParams.get('id');
+    const cafeId = urlParams.get('cafeId');
     fetch(`http://localhost:3000/cafe/${cafeId}`)
         .then(response => {
             if (!response.ok) {
@@ -81,17 +101,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (cafe) {
                 cafeImageContainer.innerHTML = `<img src="${cafe[0].img_url}">`;
-                cafeInformationContainer.innerHTML = `<h2>${cafe[0].cafe_name}</h2> <p>Address: ${cafe[0].address}, ${cafe[0].city}</p><p>${cafe[0].description}</p>`;
+                cafeInformationContainer.innerHTML = `<h2>${cafe[0].cafe_name}</h2><p>Address: ${cafe[0].address}, ${cafe[0].city}</p><p>${cafe[0].description}</p>`;
                 cafeDescriptionContainer.innerHTML = ``;
                 wifiImage.src = cafe[0].wifi ? './img/istrue.png' : './img/isfalse.png';
                 foodImage.src = cafe[0].serve_food ? './img/istrue.png' : './img/isfalse.png';
             }
-
         })
         .catch(err => {
             console.error('Error fetching cafe details:', err);
         });
 });
+
 
 
 
