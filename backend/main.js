@@ -171,6 +171,38 @@ app.post('/new/cafe', (req, res) => {
 });
 
 
+//Lucas
+// Show user information
+app.get('/user-info', (req, res) => {
+    const username = req.query.username;
+
+
+    // Query user information from the database based on username
+    connection.query('SELECT first_name, last_name, username, email, location FROM users WHERE username = ?',
+        [username], (err, results) => {
+        if (err) {
+            console.error('Error querying MySQL:', err);
+            res.status(500).json({ error: 'Internal Server Error' });
+            return;
+        }
+
+        if (results.length === 0) {
+            res.status(404).json({ error: 'User not found' });
+            return;
+        }
+
+        const user = results[0];
+        res.json({
+            firstName: user.first_name,
+            lastName: user.last_name,
+            userName: user.username,
+            email: user.email,
+            location: user.location
+        });
+    });
+});
+
+
 
 
 // Oprette ny favorit //
