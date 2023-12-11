@@ -114,9 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
-
-
 // Forside til login og registrere bruger.
 //Lucas
 registerButton.addEventListener("click", () => {
