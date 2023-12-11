@@ -1,4 +1,5 @@
 /* General rules */
+
 * {
     margin: 0;
     padding: 0;
@@ -139,5 +140,7 @@ nav {
 
 
 
-
+nav {
+    display: none;
+}
 
