@@ -17,8 +17,8 @@ const connection = mysql.createConnection({
     host:"localhost",
     user:"root",
     port: 3306,
-    password: "Storpenisdreng1",
-    database:"student_cafe_portfolje6"
+    password: "Rækkehus2023",
+    database:"student_cafe"
 });
 
 
@@ -199,6 +199,43 @@ app.get('/user-info', (req, res) => {
             email: user.email,
             location: user.location
         });
+    });
+});
+
+
+
+//Add favorite café on user profile page
+app.post('/mark-favorite', (req, res) => {
+    const { cafeId } = req.body;
+    const userId = req.session.userId;
+
+    connection.query('INSERT INTO favorite (user_id, cafe_id) VALUES (?, ?)', [userId, cafeId], (err, results) => {
+        if (err) {
+            console.error('Error marking café as favorite:', err);
+            res.status(500).json({ error: 'Internal Server Error' });
+            return;
+        }
+
+        res.json({ success: true });
+    });
+});
+
+
+
+//Lucas
+//Get user favorites
+app.get('/user-favorites', (req, res) => {
+    const userId = req.session.userId;
+
+    connection.query('SELECT cafe_id FROM favorite WHERE user_id = ?', [userId], (err, results) => {
+        if (err) {
+            console.error('Error fetching user favorites:', err);
+            res.status(500).json({ error: 'Internal Server Error' });
+            return;
+        }
+
+        const favoriteCafeIds = results.map(result => result.cafe_id);
+        res.json({ favoriteCafeIds });
     });
 });
 
