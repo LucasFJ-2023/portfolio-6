@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Victor - Show more
 document.addEventListener('DOMContentLoaded', () => {
     const cafeImagesContainer = document.querySelector('#cafeImages');
-
+    const displayedCafeIds = new Set(); // Set to keep track of displayed cafe IDs
     const limit = 6; // Define the initial limit here
     let offset = 0;
 
@@ -77,17 +77,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 return response.json();
             })
             .then(cafes => {
-                cafes.forEach((cafe, index) => {
-                    const cafeLink = createCafeLink(cafe);
-                    if (index < limit) { // Display only the first 'limit' cafes initially
-                        cafeImagesContainer.appendChild(cafeLink);
-                    } else { // Hide the remaining cafes
-                        cafeLink.style.display = 'none';
-                        cafeImagesContainer.appendChild(cafeLink);
+                cafes.forEach(cafe => {
+                    if (!displayedCafeIds.has(cafe.id)) {
+                        const cafeLink = createCafeLink(cafe);
+                        if (displayedCafeIds.size < limit) {
+                            cafeImagesContainer.appendChild(cafeLink);
+                            displayedCafeIds.add(cafe.id);
+                        } else {
+                            cafeLink.style.display = 'none';
+                            cafeImagesContainer.appendChild(cafeLink);
+                            displayedCafeIds.add(cafe.id);
+                        }
                     }
                 });
 
-                if (cafes.length > limit) {
+                if (cafes.length > 0) {
                     const showMoreLink = document.createElement('a');
                     showMoreLink.textContent = 'Show more pictures';
                     showMoreLink.id = 'showMoreLink';
@@ -107,6 +111,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fetchCafes();
 });
+
+
 
 // Create cafe links
 function createCafeLink(cafe) {

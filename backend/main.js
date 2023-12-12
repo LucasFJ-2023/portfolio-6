@@ -17,8 +17,8 @@ const connection = mysql.createConnection({
     host:"localhost",
     user:"root",
     port: 3306,
-    password: "Rækkehus2023",
-    database:"student_cafe"
+    password: "Storpenisdreng1",
+    database:"student_cafe_portfolje6"
 });
 
 
@@ -342,12 +342,10 @@ app.post('/New/rating',(req,res) => {
 
 // Vis x mængde cafer tilfældigt
 // victor
-// Assuming you have a connection pool or the connection established elsewhere
-
 app.get('/all/cafes', (req, res) => {
     const limit = 20;
 
-    connection.query('SELECT * FROM cafes ORDER BY RAND() LIMIT ?', [limit], (error, results, fields) => {
+    connection.query('SELECT * FROM cafes ORDER BY RAND() ', [limit], (error, results, fields) => {
         if (error) {
             console.error(error);
             return res.status(500).send('Internal Server Error');
