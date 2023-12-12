@@ -17,8 +17,8 @@ const connection = mysql.createConnection({
     host:"localhost",
     user:"root",
     port: 3306,
-    password: "Storpenisdreng1",
-    database:"student_cafe_portfolje6"
+    password: "Rækkehus2023",
+    database:"student_cafe"
 });
 
 
@@ -176,10 +176,20 @@ app.post('/new/cafe', (req, res) => {
 app.get('/user-info', (req, res) => {
     const username = req.query.username;
 
+    let returnObject = {
 
-    // Query user information from the database based on username
-    connection.query('SELECT first_name, last_name, username, email, location FROM users WHERE username = ?',
-        [username], (err, results) => {
+    }
+
+    // Query user information and favorite cafe name from the database based on username
+    const query = (`
+        SELECT first_name, last_name, users.username, users.email, users.location, cafes.cafe_name as favorite_cafe
+        FROM users
+        INNER JOIN favorites ON users.id = favorites.user_id
+        INNER JOIN cafes ON favorites.cafe_id = cafes.id
+        WHERE users.username = ?;
+    `);
+
+    connection.query(query, [username], (err, results) => {
         if (err) {
             console.error('Error querying MySQL:', err);
             res.status(500).json({ error: 'Internal Server Error' });
@@ -191,28 +201,56 @@ app.get('/user-info', (req, res) => {
             return;
         }
 
-        const user = results[0];
-        res.json({
-            firstName: user.first_name,
-            lastName: user.last_name,
-            userName: user.username,
-            email: user.email,
-            location: user.location
-        });
+        returnObject.first_name = results[0].first_name
+        returnObject.last_name = results[0].last_name
+        returnObject.username = results[0].username
+        returnObject.email = results[0].email
+        returnObject.location = results[0].location
+
+        let arrayOfCafes = []
+        results.forEach((cafe) => {
+            let currentCafeName = cafe.favorite_cafe
+            arrayOfCafes.push(currentCafeName);
+        })
+        returnObject.favoriteCafe = arrayOfCafes
+        console.log(returnObject)
+
+       //  const user = results[0];
+       //  const favorite_cafe = results.map((result) => result.favorite_cafe_name).filter(Boolean);
+       //  user.favorite_cafes = favorite_cafe;
+
+        res.send(returnObject);
     });
 });
 
 
+/*
+//Lucas
+//Get user favorites
+app.get('/user-favorites', (req, res) => {
+    const userId = req.session.userId;
+
+    connection.query('SELECT cafe_id FROM favorite WHERE user_id = ?', [userId], (err, results) => {
+        if (err) {
+            console.error('Error fetching user favorites:', err);
+            res.status(500).json({ error: 'Internal Server Error' });
+            return;
+        }
+
+        const favoriteCafeIds = results.map(result => result.cafe_id);
+        res.json({ favoriteCafeIds });
+    });
+});
+*/
 
 
 // Oprette ny favorit //
-app.post('/new/favorite',(req,res) => {
-    //Get the data from the request body
-    const userId = req.body.userId
-    const cafeId = req.body.cafeId
+app.post('/add-favorite', (req, res) => {
+    const userId = req.body.userId;
+    const cafeId = req.body.cafeId;
 
     connection.query(
-        'INSERT INTO `favorites`(user_id, cafe_id) values (?,?)',
+        'INSERT INTO favorites (user_id, cafe_id) VALUES (?, ?)',
         [userId, cafeId],
         function (err, results) {
             if (err) {
@@ -220,15 +258,16 @@ app.post('/new/favorite',(req,res) => {
                 res.status(500).send('Internal Server Error');
                 return;
             }
-            res.send(results)
+            res.send(results);
         }
-    )
-})
+    );
+});
 
 
 
 
 
+/*
 // Oprette nye åbningstider til caféer //
 app.post('/new/openingHours',(req,res) => {
     //Get the data from the request body
@@ -252,7 +291,7 @@ app.post('/new/openingHours',(req,res) => {
         }
     )
 })
-
+*/
 
 // Oprette en kommentar til en café//
 app.post('/New/comment',(req,res) => {
