@@ -176,70 +176,51 @@ app.post('/new/cafe', (req, res) => {
 app.get('/user-info', (req, res) => {
     const username = req.query.username;
 
-    // Query user information from the database based on username
-    connection.query('SELECT first_name, last_name, username, email, location FROM users WHERE username = ?',
-        [username], (err, results) => {
-            if (err) {
-                console.error('Error querying MySQL:', err);
-                res.status(500).json({ error: 'Internal Server Error' });
-                return;
-            }
+    let returnObject = {
 
-            if (results.length === 0) {
-                res.status(404).json({ error: 'User not found' });
-                return;
-            }
+    }
 
-            const user = results[0];
+    // Query user information and favorite cafe name from the database based on username
+    const query = (`
+        SELECT first_name, last_name, users.username, users.email, users.location, cafes.cafe_name as favorite_cafe
+        FROM users
+        INNER JOIN favorites ON users.id = favorites.user_id
+        INNER JOIN cafes ON favorites.cafe_id = cafes.id
+        WHERE users.username = ?;
+    `);
 
-            // Now, query user's favorite cafes based on user ID
-            connection.query('SELECT cafe_id FROM favorites WHERE user_id = ?',
-                [user.id], (err, favoriteResults) => {
-                    if (err) {
-                        console.error('Error querying favorite cafes:', err);
-                        res.status(500).json({ error: 'Internal Server Error' });
-                        return;
-                    }
+    connection.query(query, [username], (err, results) => {
+        if (err) {
+            console.error('Error querying MySQL:', err);
+            res.status(500).json({ error: 'Internal Server Error' });
+            return;
+        }
 
-                    // Extract the cafe IDs from the results
-                    const favoriteCafeIds = favoriteResults.map((row) => row.cafe_id);
+        if (results.length === 0) {
+            res.status(404).json({ error: 'User not found' });
+            return;
+        }
 
-                    // If there are favorite cafes, query their names from the cafes table
-                    if (favoriteCafeIds.length > 0) {
-                        connection.query('SELECT cafe_id, cafe_name FROM cafes WHERE cafe_id IN (?)',
-                            [favoriteCafeIds], (err, cafeResults) => {
-                                if (err) {
-                                    console.error('Error querying cafe names:', err);
-                                    res.status(500).json({ error: 'Internal Server Error' });
-                                    return;
-                                }
+        returnObject.first_name = results[0].first_name
+        returnObject.last_name = results[0].last_name
+        returnObject.username = results[0].username
+        returnObject.email = results[0].email
+        returnObject.location = results[0].location
 
-                                // Extract the cafe names from the results
-                                const favoriteCafes = cafeResults.map((row) => row.cafe_name);
+        let arrayOfCafes = []
+        results.forEach((cafe) => {
+            let currentCafeName = cafe.favorite_cafe
+            arrayOfCafes.push(currentCafeName);
+        })
+        returnObject.favoriteCafe = arrayOfCafes
+        console.log(returnObject)
 
-                                // Return combined user information with favorite cafes
-                                res.json({
-                                    firstName: user.first_name,
-                                    lastName: user.last_name,
-                                    userName: user.username,
-                                    email: user.email,
-                                    location: user.location,
-                                    favoriteCafes: favoriteCafes,
-                                });
-                            });
-                    } else {
-                        // Return user information without favorite cafes
-                        res.json({
-                            firstName: user.first_name,
-                            lastName: user.last_name,
-                            userName: user.username,
-                            email: user.email,
-                            location: user.location,
-                            favoriteCafes: [],
-                        });
-                    }
-                });
-        });
+       //  const user = results[0];
+       //  const favorite_cafe = results.map((result) => result.favorite_cafe_name).filter(Boolean);
+       //  user.favorite_cafes = favorite_cafe;
+
+        res.send(returnObject);
+    });
 });
 
 
@@ -265,11 +246,11 @@ app.get('/user-favorites', (req, res) => {
 
 // Oprette ny favorit //
 app.post('/add-favorite', (req, res) => {
-    const userId = req.session.userId;
+    const userId = req.body.userId;
     const cafeId = req.body.cafeId;
 
     connection.query(
-        'INSERT INTO favorite (user_id, cafe_id) VALUES (?, ?)',
+        'INSERT INTO favorites (user_id, cafe_id) VALUES (?, ?)',
         [userId, cafeId],
         function (err, results) {
             if (err) {
