@@ -355,6 +355,25 @@ app.get('/all/cafes', (req, res) => {
 });
 
 
+app.get('/cafes', (req, res) => {
+    let city_request = ""
+    let wifi_request = ""
+    let food_request = ""
+
+    if (req.query.city !== "Alle byer") city_request = req.query.city
+    if (req.query.wifi !== undefined) wifi_request = req.query.wifi
+    if (req.query.food !== undefined) food_request = req.query.food
+
+    connection.query('SELECT * FROM cafes where city LIKE ? AND wifi LIKE ? AND serve_food LIKE ?',[city_request+"%", wifi_request+"%", food_request+"%"], (error, results, fields) => {
+        if (error) {
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+        res.send(results);
+    });
+});
+
 
 
 

@@ -64,8 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // Victor - Show more
 document.addEventListener('DOMContentLoaded', () => {
     const cafeImagesContainer = document.querySelector('#cafeImages');
-    const displayedCafeIds = new Set(); // Set to keep track of displayed cafe IDs
-    const limit = 6; // Define the initial limit here
+    const displayedCafeIds = new Set();
+    const limit = 6;
     let offset = 0;
 
     const fetchCafes = () => {
@@ -112,7 +112,32 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchCafes();
 });
 
+// Kasper
+function updateCafes() {
 
+    let quoery = window.location.search;
+
+    // Construct the URL for the cafes endpoint with filters
+    let url = "http://localhost:3000/cafes";
+
+    url +=quoery
+
+    console.log(url)
+    fetch(url)
+        .then(response => response.json())
+        .then(data => displayCafes(data))
+        .catch(error => console.error('Error fetching cafes:', error));
+}
+
+function displayCafes(cafes) {
+    cafesList.innerHTML = ''; // Clear previous results
+
+    cafes.forEach(cafe => {
+        const cafeItem = document.createElement('div');
+        cafeItem.textContent = cafe.cafe_name; // Assuming 'cafe_name' is the field in your database
+        cafesList.appendChild(cafeItem);
+    });
+}
 
 // Create cafe links
 function createCafeLink(cafe) {
