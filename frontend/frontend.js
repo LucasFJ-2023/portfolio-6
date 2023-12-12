@@ -1,25 +1,25 @@
 //Lucas
 //Create user
-const firstNameInputField = document.getElementById('register-firstName');
-const lastNameInputField = document.getElementById('register-lastName');
-const emailInputField = document.getElementById('register-email');
-const passwordInputField = document.getElementById('register-password');
-const usernameInputField = document.getElementById('register-username');
-const locationInputField = document.getElementById('register-location')
+const firstNameInputField = document.querySelector('#register-firstName');
+const lastNameInputField = document.querySelector('#register-lastName');
+const emailInputField = document.querySelector('#register-email');
+const passwordInputField = document.querySelector('#register-password');
+const usernameInputField = document.querySelector('#register-username');
+const locationInputField = document.querySelector('#register-location')
 const registerButton = document.querySelector(".register-button")
 
 //Login
-const emailLogin = document.getElementById('login-email');
-const passwordLogin = document.getElementById('login-password');
+const emailLogin = document.querySelector('#login-email');
+const passwordLogin = document.querySelector('#login-password');
 const loginButton = document.querySelector(".login-button")
 
 //Create a new café
-const cafeNameInputField = document.getElementById('register-cafeName');
-const addressInputField = document.getElementById('register-address');
-const cityInputField = document.getElementById('register-city');
-const descriptionInputField = document.getElementById('register-description');
-const wifiInputField = document.getElementById('register-wifi');
-const serveFoodInputField = document.getElementById('register-serveFood');
+const cafeNameInputField = document.querySelector('#register-cafeName');
+const addressInputField = document.querySelector('#register-address');
+const cityInputField = document.querySelector('#register-city');
+const descriptionInputField = document.querySelector('#register-description');
+const wifiInputField = document.querySelector('#register-wifi');
+const serveFoodInputField = document.querySelector('#register-serveFood');
 const registerCafeButton = document.querySelector(".registerCafe-button");
 
 
@@ -246,7 +246,7 @@ loginButton.addEventListener("click", () => {
 // This function executes when the DOM content is fully loaded and ready to be manipulated
 document.addEventListener('DOMContentLoaded', function() {
     // Get elements related to the login functionality
-    const loginCheckbox = document.getElementById('already-user'); // Get the "Log-in" checkbox
+    const loginCheckbox = document.querySelector('#already-user'); // Get the "Log-in" checkbox
     const loginForm = document.querySelector('.login-form'); // Get the login form
 
     // Toggle display of login form based on checkbox change
@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // Get elements related to the registration functionality
-    const registerCheckbox = document.getElementById('new-user'); // Get the "Create user" checkbox
+    const registerCheckbox = document.querySelector('#new-user'); // Get the "Create user" checkbox
     const registerForm = document.querySelector('.register-form'); // Get the registration form
 
     // Toggle display of register form based on checkbox change
@@ -275,7 +275,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // Get elements related to the registration functionality
-const registerCafeCheckbox = document.getElementById('new-cafe'); // Get the "Create new café" checkbox
+const registerCafeCheckbox = document.querySelector('#new-cafe'); // Get the "Create new café" checkbox
 const registerCafeForm = document.querySelector('.registerCafe-form'); // Get the café registration form
 
 
