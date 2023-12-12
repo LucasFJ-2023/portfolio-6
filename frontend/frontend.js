@@ -25,58 +25,7 @@ const registerCafeButton = document.querySelector(".registerCafe-button");
 
 
 // victor - Display all cafes in HTML #cafeImages
-document.addEventListener('DOMContentLoaded', () => {
-    const cafeImagesContainer = document.querySelector('#cafeImages');
-    fetch('http://localhost:3000/all/cafes')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Not ok');
-            }
-            return response.json();
-        })
-        .then(cafes => {
-            let rowDiv = document.createElement('div');
-            rowDiv.classList.add('row');
-            cafeImagesContainer.appendChild(rowDiv);
-
-            cafes.forEach((cafe, index) => {
-                if (index > 0 && index % 3 === 0) {
-                    rowDiv = document.createElement('div');
-                    rowDiv.classList.add('row');
-                    cafeImagesContainer.appendChild(rowDiv);
-                }
-
-                const cafeLink = document.createElement('a');
-                const cafeDiv = document.createElement('div');
-                const cafeImage = document.createElement('img');
-
-                cafeLink.href = `cafe.html?cafeId=${cafe.id}`;
-                cafeLink.classList.add('cafe-link');
-
-                cafeImage.src = cafe.img_url;
-                cafeImage.alt = cafe.cafe_name;
-                cafeImage.classList.add('cafe-image');
-
-                const cafeDetails = document.createElement('div');
-                cafeDetails.innerHTML = `
-                    <h3>${cafe.cafe_name}</h3>
-                    <p>Address: ${cafe.address}, ${cafe.city}</p>
-                    <p>Description: ${cafe.description}</p>
-                `;
-                cafeDetails.classList.add('cafe-details');
-
-                cafeDiv.classList.add('cafe-container');
-                cafeDiv.appendChild(cafeImage);
-                cafeDiv.appendChild(cafeDetails);
-
-                cafeLink.appendChild(cafeDiv); // Append the whole structure to the link
-                rowDiv.appendChild(cafeLink); // Append the link to the row
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching cafes:', error);
-        });
-});
+//
 
 
 
@@ -111,6 +60,85 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error fetching cafe details:', err);
         });
 });
+
+// Victor - Show more
+document.addEventListener('DOMContentLoaded', () => {
+    const cafeImagesContainer = document.querySelector('#cafeImages');
+
+    const limit = 6; // Define the initial limit here
+    let offset = 0;
+
+    const fetchCafes = () => {
+        fetch(`http://localhost:3000/all/cafes?limit=${limit}&offset=${offset}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Not ok');
+                }
+                return response.json();
+            })
+            .then(cafes => {
+                cafes.forEach((cafe, index) => {
+                    const cafeLink = createCafeLink(cafe);
+                    if (index < limit) { // Display only the first 'limit' cafes initially
+                        cafeImagesContainer.appendChild(cafeLink);
+                    } else { // Hide the remaining cafes
+                        cafeLink.style.display = 'none';
+                        cafeImagesContainer.appendChild(cafeLink);
+                    }
+                });
+
+                if (cafes.length > limit) {
+                    const showMoreLink = document.createElement('a');
+                    showMoreLink.textContent = 'Show more pictures';
+                    showMoreLink.id = 'showMoreLink';
+                    cafeImagesContainer.appendChild(showMoreLink);
+
+                    showMoreLink.addEventListener('click', () => {
+                        offset += limit;
+                        fetchCafes(); // Fetch more cafes when 'Show more' is clicked
+                        showMoreLink.remove(); // Remove the 'Show more' link
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching cafes:', error);
+            });
+    };
+
+    fetchCafes();
+});
+
+// Create cafe links
+function createCafeLink(cafe) {
+    const cafeLink = document.createElement('a');
+    cafeLink.href = `cafe.html?cafeId=${cafe.id}`;
+    cafeLink.classList.add('cafe-link');
+
+    const cafeDiv = document.createElement('div');
+    cafeDiv.classList.add('cafe-container-show-more');
+
+    const cafeImage = document.createElement('img');
+    cafeImage.src = cafe.img_url;
+    cafeImage.alt = cafe.cafe_name;
+    cafeImage.classList.add('cafe-image');
+
+    const cafeDetails = document.createElement('div');
+    cafeDetails.classList.add('cafe-details');
+    cafeDetails.innerHTML = `
+        <h2>${cafe.cafe_name}</h2>
+        <p>Address: ${cafe.address}, ${cafe.city}</p>
+        <p>${cafe.description}</p>
+    `;
+
+    cafeDiv.appendChild(cafeImage);
+    cafeDiv.appendChild(cafeDetails);
+
+    cafeLink.appendChild(cafeDiv);
+    return cafeLink;
+}
+
+
+
 
 
 
@@ -327,35 +355,3 @@ registerCafeCheckbox.addEventListener('change', function () {
         registerCafeForm.style.display = 'none'; // Hide the café registration form
     }
 });
-
-
-
-
-// Victor
-// google maps
-// Initialize and add the map
-let map;
-
-async function initMap() {
-    // The location of Uluru
-    const position = { lat: -25.344, lng: 131.031 };
-    // Request needed libraries.
-    //@ts-ignore
-    const { Map } = await google.maps.importLibrary("maps");
-    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-
-    // The map, centered at Uluru
-    map = new Map(document.getElementById("map"), {
-        zoom: 4,
-        center: position,
-        mapId: "DEMO_MAP_ID",
-    });
-
-    // The marker, positioned at Uluru
-    const marker = new AdvancedMarkerElement({
-        map: map,
-        position: position,
-        title: "Uluru",
-    });
-}
-initMap();

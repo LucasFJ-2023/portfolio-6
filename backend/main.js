@@ -303,19 +303,20 @@ app.post('/New/rating',(req,res) => {
 
 // Vis x mængde cafer tilfældigt
 // victor
-app.get('/all/cafes', (req, res) => {
-    const limit = 6;
+// Assuming you have a connection pool or the connection established elsewhere
 
-    connection.query('SELECT * FROM cafes ORDER BY RAND() LIMIT ?', [limit],
-        (error, results, fields) => {
+app.get('/all/cafes', (req, res) => {
+    const limit = 20;
+
+    connection.query('SELECT * FROM cafes ORDER BY RAND() LIMIT ?', [limit], (error, results, fields) => {
         if (error) {
             console.error(error);
-            res.status(500).send('Internal Server Error');
-            return;
+            return res.status(500).send('Internal Server Error');
         }
-        res.send(results);
+        res.status(200).json(results);
     });
 });
+
 
 
 
