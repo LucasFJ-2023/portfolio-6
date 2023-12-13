@@ -17,8 +17,8 @@ const connection = mysql.createConnection({
     host:"localhost",
     user:"root",
     port: 3306,
-    password: "Storpenisdreng1",
-    database:"student_cafe_portfolje6"
+    password: "Rækkehus2023",
+    database:"student_cafe"
 });
 
 
@@ -52,7 +52,7 @@ app.post('/user/login', (req, res) => {
 
         if (results.length > 0) {
             // User found, respond with user data
-            res.json(results[0]);
+            res.json(results[0].id);
         } else {
             // No matching user found, respond with an error
             res.status(401).json({ error: "Invalid email or password" });
@@ -215,9 +215,6 @@ app.get('/user-info', (req, res) => {
         returnObject.favoriteCafe = arrayOfCafes
         console.log(returnObject)
 
-       //  const user = results[0];
-       //  const favorite_cafe = results.map((result) => result.favorite_cafe_name).filter(Boolean);
-       //  user.favorite_cafes = favorite_cafe;
 
         res.send(returnObject);
     });
@@ -292,7 +289,7 @@ app.post('/new/openingHours',(req,res) => {
     )
 })
 */
-
+/*
 // Oprette en kommentar til en café//
 app.post('/New/comment',(req,res) => {
     //Get the data from the request body
@@ -314,9 +311,9 @@ app.post('/New/comment',(req,res) => {
         }
     )
 })
+*/
 
-
-
+/*
 // Oprette en rating til café//
 app.post('/New/rating',(req,res) => {
     //Get the data from the request body
@@ -339,6 +336,8 @@ app.post('/New/rating',(req,res) => {
         }
     )
 })
+*/
+
 
 // Vis x mængde cafer tilfældigt
 // victor

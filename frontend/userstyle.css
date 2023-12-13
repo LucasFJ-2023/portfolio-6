@@ -177,4 +177,30 @@ nav {
     display: none;
 }
 
+section.create-cafe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.create-cafe {
+    margin: 20px;
+}
+
+.registerCafe-form {
+    display: none;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #82E292;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
 
