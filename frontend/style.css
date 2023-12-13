@@ -87,59 +87,6 @@ nav {
 margin-left: 5%;
 }
 
-/* chatgpt searchbar starter */
-.search-container {
-    position: relative;
-}
-
-.search-input {
-    width: 300px;
-    padding: 15px;
-    background-color: white;
-    border: 2px solid black;
-    color: #111;
-    font-size: 15px;
-    box-shadow: 3px 1px 0px 2px, 0px -1px 0px 2px rgba(0, 0, 0, 0.62);
-    height: 58px;
-    transform: skew(-2deg, 1deg);
-    font-family: 'arial', cursive;
-}
-
-.search-char {
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: transparent;
-    transition: 500ms ease-in-out;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.search-chars {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    visibility: hidden;
-}
-
-.s-char::before {
-    content: 's';
-    transition-delay: 200ms;
-}
-
-.e-char::before {
-    content: 'e';
-    left: 12px;
-    color: #666;
-    transition-delay: 400ms;
-}
-
-/* chatgpt searchbar slutter */
-
-
-
-
 
 /* Specific cafe rules */
 #cafeWrapper {
@@ -233,7 +180,7 @@ margin-right: 10%;
 
 .cafe-details {
     text-align: center;
-    margin-top: 10px; /* Adjust spacing between image and text */
+    margin-top: 10px;
 }
 
 .cafe-details h3 {
@@ -248,7 +195,7 @@ margin-right: 10%;
 
 
 
-/* Grid layout for the showMore content */
+
 #showMore {
     display: flex;
     flex-wrap: wrap;
@@ -257,14 +204,14 @@ margin-right: 10%;
 
 
 .cafe-container-show-more {
-    margin-bottom: 3px; /* Adjust margin between items */
-    text-align: center; /* Center align content */
+    margin-bottom: 3px;
+    text-align: center;
     padding: 10px;
     justify-content: space-between;
 }
 
  .cafe-container-show-more img {
-    width: 100%; /* Make images fill their container */
+    width: 100%;
     height: auto;
 }
 
