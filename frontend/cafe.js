@@ -1,47 +1,38 @@
-let storedUserId = localStorage.getItem("userId")
-console.log(storedUserId);
-
-
-
+//Lucas
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const cafeId = urlParams.get('cafeId');
     const stjerneButton = document.querySelector('#stjerne');
-
-    // Retrieve user ID from localStorage
-    const userId = localStorage.getItem('userId');
-
-    if (!userId) {
-        console.error('User ID not available');
-        // Handle the case where user ID is not available
-        return;
-    }
+    const storedUserId = localStorage.getItem("userId");
 
     stjerneButton.addEventListener('click', () => {
-        console.log("button clicked")
-        // Make a request to add the cafe to favorites
-        fetch('http://localhost:3000/add-favorite', {
+        console.log("button clicked");
+
+        // Make a request to toggle the cafe in and out of favorites
+        fetch('http://localhost:3000/toggle-favorite', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ userId, cafeId }),
+            body: JSON.stringify({ userId: storedUserId, cafeId }),
         })
             .then((response) => {
+                console.log('Server response status:', response.status);
+
                 if (!response.ok) {
-                    throw new Error("Failed to add cafe to favorites");
+                    throw new Error("Failed to update cafe status");
                 }
                 return response.json();
             })
             .then((result) => {
                 // Handle success if needed
-                console.log('Cafe added to favorites:', result);
-                alert('Cafe added to favorites!');
+                console.log('Cafe status updated:', result);
+                alert(result.message);
             })
             .catch((error) => {
-                console.error(error.message);
+                console.error('Fetch error:', error.message);
                 // Handle error if needed
-                alert('Failed to add cafe to favorites.');
+                alert('Failed to update cafe status.');
             });
     });
 });

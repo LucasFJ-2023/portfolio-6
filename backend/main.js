@@ -145,7 +145,7 @@ app.post('/new/user',(req,res) => {
 
 
 
-
+//Lucas
 // Oprette ny cafe //
 app.post('/new/cafe', (req, res) => {
     // Get the data from the request body
@@ -241,21 +241,49 @@ app.get('/user-favorites', (req, res) => {
 */
 
 
-// Oprette ny favorit //
-app.post('/add-favorite', (req, res) => {
+// Lucas
+// Tilføje en ny favorit café eller fjerne en café
+app.post('/toggle-favorite', (req, res) => {
     const userId = req.body.userId;
     const cafeId = req.body.cafeId;
 
+    // Check if the cafe is already a favorite for the user
     connection.query(
-        'INSERT INTO favorites (user_id, cafe_id) VALUES (?, ?)',
+        'SELECT * FROM favorites WHERE user_id = ? AND cafe_id = ?',
         [userId, cafeId],
-        function (err, results) {
+        (err, results) => {
             if (err) {
                 console.error(err);
-                res.status(500).send('Internal Server Error');
-                return;
+                return res.status(500).send('Internal Server Error');
             }
-            res.send(results);
+
+            if (results.length > 0) {
+                // Cafe is already a favorite, so remove it
+                connection.query(
+                    'DELETE FROM favorites WHERE user_id = ? AND cafe_id = ?',
+                    [userId, cafeId],
+                    (deleteErr) => {
+                        if (deleteErr) {
+                            console.error(deleteErr);
+                            return res.status(500).send('Internal Server Error');
+                        }
+                        res.send({ message: 'Cafe removed from favorites' });
+                    }
+                );
+            } else {
+                // Cafe is not a favorite, so add it
+                connection.query(
+                    'INSERT INTO favorites (user_id, cafe_id) VALUES (?, ?)',
+                    [userId, cafeId],
+                    (insertErr) => {
+                        if (insertErr) {
+                            console.error(insertErr);
+                            return res.status(500).send('Internal Server Error');
+                        }
+                        res.send({ message: 'Cafe added to favorites' });
+                    }
+                );
+            }
         }
     );
 });

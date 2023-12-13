@@ -14,9 +14,8 @@ const passwordLogin = document.querySelector('#login-password');
 const loginButton = document.querySelector(".login-button")
 
 
-
-// Forside til login og registrere bruger.
 //Lucas
+// Forside til login og registrere bruger.
 registerButton.addEventListener("click", () => {
     let firstName = firstNameInputField.value;
     let lastName = lastNameInputField.value;
@@ -47,7 +46,8 @@ registerButton.addEventListener("click", () => {
         .then(response => response.json())
         .then(data => {
             // Handle the response data as needed
-            console.log("User registered:", data);
+            console.log("User registered:", data)
+            alert("User created, now login");
         })
         //Error handling
         .catch(error => {
@@ -117,6 +117,8 @@ loginCheckbox.addEventListener("click",() => {
 })
 
 
+
+//Lucas
 //Register Checkbox
 // Get elements related to the registration functionality
 const registerCheckbox = document.querySelector('#new-user'); // Get the "Create user" checkbox
