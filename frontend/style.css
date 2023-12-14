@@ -269,12 +269,12 @@ input[type="checkbox"] {
     display: none;
 }
 
-.nav-container.label:hover {color: #82E292}
+label:hover {color: #82E292}
 
-.nav-container.label:active {color: red}
+label:active {color: red}
 
 
-.nav-container.label {
+label {
     cursor: pointer;
     font-weight: bold;
     font-size: 16px;
@@ -413,6 +413,9 @@ h1 {
     }
 }
 
+
+
+
 /* Style til user profile */
 
 .userInfoAndCreateCafe {
@@ -453,6 +456,7 @@ button.getUserInfo{
 
 #usernameInput {
     width: 125px;
+    margin-top: 20px;
 }
 
 .profile-box h3 {
@@ -465,7 +469,12 @@ button.getUserInfo{
     margin-top: 20px;
 }
 
-.user-info p {
-
+#cafeInput {
+    color: #111111;
+    margin-top: px;
 }
 
+
+.create-cafe {
+    margin-top: 55px;
+}
