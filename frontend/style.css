@@ -55,10 +55,7 @@ nav {
     align-items: center;
 }
 
-.logo {
-    width: 50px;
-    margin-right: 35px;
-}
+
 
 .nav-links {
     list-style: none;
@@ -84,9 +81,11 @@ nav {
 
 .profile {
     width: 100px;
-margin-left: 5%;
+    padding-left: 20px;
+
 
 }
+
 
 
 /* Specific cafe rules */
@@ -260,6 +259,11 @@ input[type="checkbox"] {
     display: none;
 }
 
+label:hover {color: #82E292}
+
+label:active {color: red}
+
+
 label {
     cursor: pointer;
     font-weight: bold;
@@ -316,6 +320,27 @@ h1 {
 #explainer-text{text-align: center; color: #ffffff;}
 
 .blue-background{background-color: #130E2B}
+
+.filler {padding-bottom: 100px}
+
+.submitBtn {width: 57%}
+
+#usernameInput {width: 33%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* mobile */
