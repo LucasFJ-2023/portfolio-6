@@ -67,20 +67,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 });
 
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
+function fetchAndDisplayCafes(query) {
     const cafeImagesContainer = document.querySelector('#cafeImages');
-    let limit = 6;
-    let offset = 0;
-    let currentQuery = '';
+    const limit = 21;
 
-    const fetchCafes = () => {  // Remove the query parameter
-        const url = `http://localhost:3000/cafes?limit=${limit}&offset=${offset}${currentQuery}`;
-        console.log(url);
+    const fetchCafes = () => {
+        const url = `http://localhost:3000/cafes?limit=${limit}${query}`;
+
         fetch(url)
             .then(response => {
                 if (!response.ok) {
@@ -92,87 +85,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 cafeImagesContainer.innerHTML = '';
                 cafes.forEach((cafe, index) => {
                     const cafeLink = createCafeLink(cafe);
-                    if (index < limit) {
+                    if (cafes) {
                         cafeImagesContainer.appendChild(cafeLink);
                     } else {
                         cafeLink.style.display = 'none';
-                        cafeImagesContainer.appendChild(cafeLink);
                     }
-
                 });
-
-                if (cafes.length > 0) {
-                    showMoreLink.style.display = 'block';
-                } else {
-                    showMoreLink.style.display = 'none';
-                }
-
             })
             .catch(error => {
                 console.error('Error fetching cafes:', error);
             });
     };
 
-    // Update the click event listener
-    // Create the "Show more pictures" link
-    const showMoreLink = document.createElement('a');
-    showMoreLink.textContent = 'Show more pictures';
-    showMoreLink.id = 'showMoreLink';
-    cafeImagesContainer.appendChild(showMoreLink);
-    showMoreLink.addEventListener('click', () => {
-        offset += limit;
-        fetchCafes();
-        limit = 20;
-    });
+    fetchCafes();
+}
 
 
+document.addEventListener('DOMContentLoaded', () => {
+    fetchAndDisplayCafes('');
 
-    // Form listener
     const form = document.querySelector('form');
     form.addEventListener('submit', (event) => {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault();
         const city = document.querySelector('#cityDropdown').value;
         const wifi = document.querySelector('#wifiCheckbox').checked ? '1' : '';
         const food = document.querySelector('#foodCheckbox').checked ? '1' : '';
-        console.log(city, wifi, food);
-        currentQuery = `&city=${city}&wifi=${wifi}&food=${food}`;
-        offset = 0;
-        fetchCafes(currentQuery);
-    });
 
-    fetchCafes(); // Fetch cafes initially without any query
-    updateCafes();
+        const query = `&city=${city}&wifi=${wifi}&food=${food}`;
+        fetchAndDisplayCafes(query);
+    });
 });
 
-
-
-
-// Kasper
-function updateCafes() {
-
-    let quoery = window.location.search;
-
-    // Construct the URL for the cafes endpoint with filters
-    let url = "http://localhost:3000/cafes";
-
-    url +=quoery
-
-    console.log(url)
-    fetch(url)
-        .then(response => response.json())
-        .then(data => displayCafes(data))
-        .catch(error => console.error('Error fetching cafes:', error));
-}
-
-function displayCafes(cafes) {
-    const cafesList = document.querySelector('#cafesList');
-    cafesList.innerHTML = ''; // Clear previous results
-
-    cafes.forEach(cafe => {
-        const cafeItem = document.createElement('div');
-        cafeItem.textContent = cafe.cafe_name; // Assuming 'cafe_name' is the field in your database
-        cafesList.appendChild(cafeItem);
-    });
-}
 
 ////////////////////////////////////////////////////////////////////

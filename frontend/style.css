@@ -233,6 +233,65 @@ margin-right: 10%;
     margin-top: 20px;
     margin-bottom: 50px}
 
+hr.solid {
+    border-top: 4px solid navajowhite;
+    margin-right: 520px;
+
+}
+
+section.user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.log-in, .creat-user {
+    margin: 20px;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+label {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.login-form, .register-form {
+    display: none;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 15px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+
+.login-button, .register-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #82E292;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
 
 
 /* mobile */
