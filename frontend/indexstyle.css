@@ -17,14 +17,14 @@ h3 {
     text-align: center;
 }
 
-section.user, section.create-cafe {
+section.user {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-.log-in, .creat-user, .create-cafe {
+.log-in, .creat-user {
     margin: 20px;
 }
 
@@ -38,7 +38,7 @@ label {
     font-size: 16px;
 }
 
-.login-form, .register-form, .registerCafe-form {
+.login-form, .register-form {
     display: none;
     padding: 20px;
     box-sizing: border-box;
