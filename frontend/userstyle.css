@@ -88,7 +88,7 @@ nav {
     margin-left: 5%;
 }
 
-/* chatgpt searchbar starter */
+
 .search-container {
     position: relative;
 }
@@ -136,7 +136,7 @@ nav {
     transition-delay: 400ms;
 }
 
-/* chatgpt searchbar slutter */
+
 
 
 #cafeImages {
@@ -172,11 +172,6 @@ nav {
 
 
 
-
-nav {
-    display: none;
-}
-
 section.create-cafe {
     display: flex;
     justify-content: center;
@@ -203,4 +198,5 @@ button {
     cursor: pointer;
     font-size: 16px;
 }
+
 
