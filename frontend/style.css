@@ -94,8 +94,11 @@ nav {
     align-items: flex-start;
     flex-direction: row;
     padding-top: 200px;
+    max-height: 800px;
 
 }
+
+#cafeWrapper p {padding-bottom: 20px}
 
 #cafeImageContainer {
     max-width: 40%;
@@ -109,19 +112,22 @@ nav {
 
 #cafeWrapper img {
     max-width: 100%;
+    max-height: 100%;
+
 }
 
 #cafeInformationContainer {
-    max-width: 40%;
-    float: right;
-    margin-left: 12%;
+    max-width: 30%;
+    float: left;
+    margin-left: 2%;
+    top: 0;
 }
 #cafeInformationContainer p{
 
 }
 #cafeInformationContainer h2  {
 margin-bottom: 1rem;
-margin-top: 55%;
+
 }
 
 
@@ -135,21 +141,23 @@ margin-top: 55%;
 }
 
 .cafe-features .cafe-features-child {
-    float: left;
+    float: right;
     margin-top: 3%
 }
 
 .icon {width:15%;
     display: block;
-    float: left;
+    float: right;
 padding-top: 2%;
 margin-right: 10%;
 }
 
 .true-or-false-wifi, .true-or-false-food{
     width:13%;
-    padding: 20px 0 20px 0;
-    float: left;
+    margin-right: 20px;
+    margin-top: 10px;
+    float: right;
+
 }
 
 
@@ -189,6 +197,8 @@ margin-right: 10%;
 
 .cafe-details p {
     margin-bottom: 8px;
+    padding: 5px 9% 0 9%;
+
 }
 
 
@@ -329,9 +339,20 @@ h1 {
 }
 
 
+#stjerne{width: 33%; float: right; margin-right: 30px}
+
+.main-section {
+    width: 33%;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+}
 
 
-
+.main-section #cafe-features{
+    background: white;
+    padding: 5%;
+}
 
 
 
@@ -354,8 +375,7 @@ h1 {
     }
 
     #cafeInformationContainer {
-        max-width: 100%;
-        width: 100%;
+        min-width: 1000px;
         margin: 0;
        padding: 1rem 0 5rem 4rem;
 
