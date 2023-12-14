@@ -9,11 +9,9 @@ body {
     font-family: Arial, sans-serif;
     font-size: 22px;
 
-}
-
-h1, h2, h3, h4, h5, h6 {
 
 }
+
 
 p {
     font-size: 16px;
@@ -36,7 +34,7 @@ body {
 
 
 .nav-container {
-    background-color: #fff;
+
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
 }
@@ -48,7 +46,7 @@ nav {
     align-items: center;
     padding: 10px 20px;
     position: fixed;
-    background: white;
+    background-color: #130E2B;
 
 }
 
@@ -75,6 +73,8 @@ nav {
 
 .nav-links a {
     text-decoration: none;
+    color: white;
+
 }
 
 .nav-right {
@@ -85,6 +85,7 @@ nav {
 .profile {
     width: 100px;
 margin-left: 5%;
+
 }
 
 
@@ -235,7 +236,10 @@ margin-right: 10%;
 
 hr.solid {
     border-top: 4px solid navajowhite;
-    margin-right: 520px;
+   width: 85%;
+    margin-left: 7.5%;
+    margin-top: 20px;
+    margin-bottom: 20px;
 
 }
 
@@ -243,7 +247,7 @@ section.user {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    margin-top: 50px;
 }
 
 .log-in, .creat-user {
@@ -282,6 +286,13 @@ input {
     box-sizing: border-box;
 }
 
+#display-img {
+    display: inline;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 25px;
+}
+
 .login-button, .register-button {
     width: 100%;
     padding: 10px;
@@ -292,6 +303,13 @@ input {
     font-size: 16px;
 }
 
+h1 {
+    font-size: 32px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+#explainer-text{text-align: center}
 
 
 /* mobile */
