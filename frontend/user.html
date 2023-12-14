@@ -21,57 +21,71 @@
 </div>
 
 
+<div class="userInfoAndCreateCafe">
+    <div class="profile-box">
+        <img src="img/profile-pic.png" height="128" width="128" class="profile-pic">
+        <h3>Profile Information</h3>
 
-<div class="filler"></div>
-<h1>Your Information</h1>
-<input type="text" id="usernameInput" placeholder="Insert Username">
-<button class="getUserInfo">Get User Information</button>
+            <input type="text" id="usernameInput" placeholder="Insert Username">
+        <button class="getUserInfo">Get User Information</button>
 
-<div class="user-info">
-  <p><strong>First Name:</strong></p><span id="first-name"></span>
-  <p><strong>Last Name:</strong> <span id="last-name"></span></p>
-  <p><strong>Username:</strong> <span id="username"></span></p>
-  <p><strong>Email:</strong> <span id="email"></span></p>
-  <p><strong>Location:</strong> <span id="location"></span></p>
-  <p><strong>Favorite Café:</strong> <span id="favorite-cafe"></span></p>
-</div>
+  <div class="user-info-container" style="display: none">
+      <ul>
+          <li>
+              <input type="firstName" placeholder="First name" id="first-name">
+          </li>
+          <li>
+              <input type="lastName" placeholder="Last name" id="last-name">
+          </li>
+          <li>
+              <input type="username" placeholder="Username" id="username">
+          </li>
+          <li>
+              <input type="email" placeholder="Email" id="email">
+          </li>
+          <li>
+              <input type="location" placeholder="Location" id="location">
+          </li>
+          <li>
+              <input type="favoriteCafe" placeholder="Favorite cafe" id="favorite-cafe">
+          </li>
+      </ul>
+  </div>
 
-</div>
 
 
 <section class="create-cafe">
   <input type="checkbox" id="new-cafe">
   <label for="new-cafe">Create new café</label>
 
-  <div class="registerCafe-form" style="display: none;">
-    <ul>
-      <li>
-        <input type="cafeName" placeholder="Café name" id="register-cafeName">
-      </li>
-      <li>
-        <input type="address" placeholder="Address" id="register-address">
-      </li>
-      <li>
-        <input type="city" placeholder="City" id="register-city">
-      </li>
-      <li>
-        <input type="description" placeholder="Café Description" id="register-description">
-      </li>
-      <li>
-        <input type="wifi" placeholder="Are There Wifi?" id="register-wifi">
-      </li>
-      <li>
-        <input type="serveFood" placeholder="Do They Serve Food?" id="register-serveFood">
-      </li>
+    <div class="registerCafe-form" style="display: none;">
+     <ul>
+        <li>
+          <input type="cafeName" placeholder="Café name" id="register-cafeName">
+        </li>
+        <li>
+          <input type="address" placeholder="Address" id="register-address">
+        </li>
+        <li>
+          <input type="city" placeholder="City" id="register-city">
+        </li>
+       <li>
+          <input type="description" placeholder="Café Description" id="register-description">
+        </li>
+        <li>
+         <input type="wifi" placeholder="Are There Wifi?" id="register-wifi">
+        </li>
+        <li>
+          <input type="serveFood" placeholder="Do They Serve Food?" id="register-serveFood">
+        </li>
       <li>
         <button class="registerCafe-button">Create café</button>
       </li>
     </ul>
   </div>
-  </div>
-
-
-</section>
+        </section>
+    </div>
+</div>
 
 
 

@@ -49,23 +49,6 @@ app.post('/user/login', (req, res) => {
 
 
 
-// Hente information på bestemt user_id //
-app.get('/user/:id',(req, res)=>{
-    const id = req.params.id
-    connection.query('SELECT * FROM users WHERE id = ?',
-        [id],(error,results)=>{
-            if (error) {
-                console.error(error);
-                res.status(500).send('Internal Server Error');
-                return;
-            }
-            res.send(results);
-        });
-});
-
-
-
-
 
 // Hente information på bestemt cafe_ide //
 app.get('/cafe/:id',(req, res)=>{
@@ -84,22 +67,6 @@ app.get('/cafe/:id',(req, res)=>{
 
 
 
-
-
-// Find café ved søgning af by //
-app.get('/cafes/search', (req,res)=>{
-    const city = req.query.city;
-    connection.query('SELECT * FROM cafes WHERE city = ?',
-        [city],
-        (error, results)=>{
-            if (error) {
-                console.error(error);
-                res.status(500).send('Internal Server Error');
-                return;
-            }
-            res.send(results);
-        });
-});
 
 
 
@@ -207,24 +174,6 @@ app.get('/user-info', (req, res) => {
 });
 
 
-/*
-//Lucas
-//Get user favorites
-app.get('/user-favorites', (req, res) => {
-    const userId = req.session.userId;
-
-    connection.query('SELECT cafe_id FROM favorite WHERE user_id = ?', [userId], (err, results) => {
-        if (err) {
-            console.error('Error fetching user favorites:', err);
-            res.status(500).json({ error: 'Internal Server Error' });
-            return;
-        }
-
-        const favoriteCafeIds = results.map(result => result.cafe_id);
-        res.json({ favoriteCafeIds });
-    });
-});
-*/
 
 
 // Lucas
@@ -276,96 +225,6 @@ app.post('/toggle-favorite', (req, res) => {
 
 
 
-
-
-/*
-// Oprette nye åbningstider til caféer //
-app.post('/new/openingHours',(req,res) => {
-    //Get the data from the request body
-    const cafeId = req.body.cafeId
-    const hverdagOpeningTime = req.body.hverdagOpen
-    const hverdagClosingTime = req.body.hverdagClosing
-    const weekendOpeningTime = req.body.weekendOpen
-    const weekendClosingTime = req.body.weekendClosing
-
-
-    connection.query(
-        'INSERT INTO `opening_hours`(cafe_id, hverdag_opening_time, hverdag_closing_time, weekend_opening_time, weekend_closing_time) values (?,?,?,?)',
-        [cafeId, hverdagOpeningTime, hverdagClosingTime, weekendOpeningTime, weekendClosingTime],
-        function (err, results) {
-            if (err) {
-                console.error(err);
-                res.status(500).send('Internal Server Error');
-                return;
-            }
-            res.send(results)
-        }
-    )
-})
-*/
-/*
-// Oprette en kommentar til en café//
-app.post('/New/comment',(req,res) => {
-    //Get the data from the request body
-    const comment = req.body.comment
-    const cafeId = req.body.cafeId
-    const userId = req.body.userId
-
-
-    connection.query(
-        'INSERT INTO `comments`(comment, cafe_id, user_id) values (?,?,?)',
-        [comment, cafeId, userId],
-        function (err, results) {
-            if (err) {
-                console.error(err);
-                res.status(500).send('Internal Server Error');
-                return;
-            }
-            res.send(results)
-        }
-    )
-})
-*/
-
-/*
-// Oprette en rating til café//
-app.post('/New/rating',(req,res) => {
-    //Get the data from the request body
-    const rating = req.body.rating
-    const userId = req.body.userId
-    const cafeId = req.body.cafeId
-
-
-
-    connection.query(
-        'INSERT INTO `ratings`(rating, user_id ,cafe_id) values (?,?,?)',
-        [rating, cafeId, userId],
-        function (err, results) {
-            if (err) {
-                console.error(err);
-                res.status(500).send('Internal Server Error');
-                return;
-            }
-            res.send(results)
-        }
-    )
-})
-*/
-
-
-// Vis x mængde cafer tilfældigt
-// victor
-app.get('/all/cafes', (req, res) => {
-    const limit = 20;
-
-    connection.query('SELECT * FROM cafes ORDER BY RAND() ', [limit], (error, results, fields) => {
-        if (error) {
-            console.error(error);
-            return res.status(500).send('Internal Server Error');
-        }
-        res.status(200).json(results);
-    });
-});
 
 
 app.get('/cafes', (req, res) => {
