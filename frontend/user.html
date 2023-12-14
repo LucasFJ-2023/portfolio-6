@@ -3,39 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>User profile</title>
-  <link rel="stylesheet" href="userstyle.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <div class="nav-container">
   <nav>
     <div class="nav-left">
-      <img class="logo" src="img/cafepoint.png" height="80" width="180"  alt="Logo">
-      <ul class="nav-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Contacts</a></li>
-      </ul>
+      <a href="forside.html"> <img class="logo" src="img/logocafe.svg" height="100" width="100"  style="margin: 10px 20px 10px 10px" alt="Logo"><img/></a>
     </div>
     <div class="nav-right">
-      <div class="search-container">
-        <input type="text" class="search-input" required>
-        <div class="search-chars">
-          <span class="s-char">s</span>
-          <span class="e-char">e</span>
-          <span class="a-char">a</span>
-          <span class="r-char">r</span>
-          <span class="c-char">c</span>
-          <span class="h-char">h</span>
-        </div>
-      </div>
-      <a href="user_profile.html">
-        <img class="profile" src="img/profile.png" alt="Profile">
+
+      <a href="user.html">
+        <img class="profile" src="img/profile.svg" alt="Profile">
       </a>
     </div>
   </nav>
 </div>
 
 
+
+<div class="filler"></div>
 <h1>Your Information</h1>
 <input type="text" id="usernameInput" placeholder="Insert Username">
 <button class="getUserInfo">Get User Information</button>
@@ -49,7 +36,6 @@
   <p><strong>Favorite Café:</strong> <span id="favorite-cafe"></span></p>
 </div>
 
-<div id="cafeImages">
 </div>
 
 
