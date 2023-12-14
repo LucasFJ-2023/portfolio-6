@@ -23,20 +23,6 @@ const connection = mysql.createConnection({
 
 
 
-// Returnere alle caféer //
-app.get('/cafes', (req, res) => {
-    connection.query('SELECT * FROM cafes', (error, results, fields) => {
-        if (error) {
-            console.error(error);
-            res.status(500).send('Internal Server Error');
-            return;
-        }
-        res.send(results);
-    });
-});
-
-
-
 
 //Lucas
 //Så user kan logge ind

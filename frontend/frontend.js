@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     const cafeImagesContainer = document.querySelector('#cafeImages');
-    const limit = 6;
+    let limit = 6;
     let offset = 0;
     let currentQuery = '';
 
@@ -120,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         cafeLink.style.display = 'none';
                         cafeImagesContainer.appendChild(cafeLink);
                     }
+
                 });
 
                 if (cafes.length > 0) {
@@ -127,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     showMoreLink.style.display = 'none';
                 }
+
             })
             .catch(error => {
                 console.error('Error fetching cafes:', error);
@@ -142,6 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showMoreLink.addEventListener('click', () => {
         offset += limit;
         fetchCafes();
+        limit = 20;
     });
 
     // Form listener
