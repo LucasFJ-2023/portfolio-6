@@ -120,12 +120,11 @@ loginCheckbox.addEventListener("click",() => {
 
 //Lucas
 //Register Checkbox
-// Get elements related to the registration functionality
 const registerCheckbox = document.querySelector('#new-user'); // Get the "Create user" checkbox
 const registerForm = document.querySelector('.register-form'); // Get the registration form
 
-            // Toggle display of register form based on checkbox change
-registerCheckbox.addEventListener('change', function () {
+
+registerCheckbox.addEventListener('click', function () {
                 if (registerCheckbox.checked) {
                     registerForm.style.display = 'block'; // Display the registration form
                 } else {

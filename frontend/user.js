@@ -82,6 +82,7 @@ registerCafeButton.addEventListener("click", () => {
         .then(data => {
             // Handle the response data as needed
             console.log("Cafe registered:", data);
+            alert("Café registered");
         })
         //Error handling
         .catch(error => {
@@ -99,7 +100,7 @@ const registerCafeForm = document.querySelector('.registerCafe-form'); // Get th
 
 
 // Toggle display of café register form based on checkbox change
-registerCafeCheckbox.addEventListener('change', function () {
+registerCafeCheckbox.addEventListener('click', function () {
     if (registerCafeCheckbox.checked) {
         registerCafeForm.style.display = 'block'; // Display the café registration form
     } else {

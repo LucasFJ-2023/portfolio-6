@@ -124,14 +124,13 @@ app.post('/new/cafe', (req, res) => {
 });
 
 
+
+
 //Lucas
 // Show user information
 app.get('/user-info', (req, res) => {
     const username = req.query.username;
 
-    let returnObject = {
-
-    }
 
     // Query user information and favorite cafe name from the database based on username
     const query = (`
@@ -142,116 +141,127 @@ app.get('/user-info', (req, res) => {
         WHERE users.username = ?;
     `);
 
+    // Execute a MySQL query to retrieve user information based on the provided username
     connection.query(query, [username], (err, results) => {
+        // Check for errors during the database query
         if (err) {
             console.error('Error querying MySQL:', err);
-            res.status(500).json({ error: 'Internal Server Error' });
-            return;
+            // Send a 500 Internal Server Error response to the client
+            res.status(500).json({error: 'Internal Server Error'});
+            return; // Exit the function
         }
 
+        // Check if the user was not found in the database
         if (results.length === 0) {
-            res.status(404).json({ error: 'User not found' });
-            return;
+            // Send a 404 Not Found response to the client
+            res.status(404).json({error: 'User not found'});
+            return; // Exit the function
         }
 
-        returnObject.first_name = results[0].first_name
-        returnObject.last_name = results[0].last_name
-        returnObject.username = results[0].username
-        returnObject.email = results[0].email
-        returnObject.location = results[0].location
+        // Create an object to store the user information
+        let returnObject = {};
 
-        let arrayOfCafes = []
+        // Extract specific fields from the first result and assign them to returnObject properties
+        returnObject.first_name = results[0].first_name;
+        returnObject.last_name = results[0].last_name;
+        returnObject.username = results[0].username;
+        returnObject.email = results[0].email;
+        returnObject.location = results[0].location;
+
+        // Iterate through the results to extract favorite cafes
+        let arrayOfCafes = [];
         results.forEach((cafe) => {
-            let currentCafeName = cafe.favorite_cafe
+            let currentCafeName = cafe.favorite_cafe;
             arrayOfCafes.push(currentCafeName);
-        })
-        returnObject.favoriteCafe = arrayOfCafes
-        console.log(returnObject)
+        });
 
+        // Assign the array of favorite cafes to the returnObject
+        returnObject.favoriteCafe = arrayOfCafes;
 
+        // Log the final returnObject to the console
+        console.log(returnObject);
+
+        // Send the returnObject as a JSON response to the client
         res.send(returnObject);
     });
-});
 
-
+}
+)
 
 
 // Lucas
 // Tilføje en ny favorit café eller fjerne en café
-app.post('/toggle-favorite', (req, res) => {
-    const userId = req.body.userId;
-    const cafeId = req.body.cafeId;
+    app.post('/toggle-favorite', (req, res) => {
+        const userId = req.body.userId;
+        const cafeId = req.body.cafeId;
 
-    // Check if the cafe is already a favorite for the user
-    connection.query(
-        'SELECT * FROM favorites WHERE user_id = ? AND cafe_id = ?',
-        [userId, cafeId],
-        (err, results) => {
-            if (err) {
-                console.error(err);
-                return res.status(500).send('Internal Server Error');
-            }
+        // Check if the cafe is already a favorite for the user
+        connection.query(
+            'SELECT * FROM favorites WHERE user_id = ? AND cafe_id = ?',
+            [userId, cafeId],
+            (err, results) => {
+                if (err) {
+                    console.error(err);
+                    return res.status(500).send('Internal Server Error');
+                }
 
-            if (results.length > 0) {
-                // Cafe is already a favorite, so remove it
-                connection.query(
-                    'DELETE FROM favorites WHERE user_id = ? AND cafe_id = ?',
-                    [userId, cafeId],
-                    (deleteErr) => {
-                        if (deleteErr) {
-                            console.error(deleteErr);
-                            return res.status(500).send('Internal Server Error');
+                if (results.length > 0) {
+                    // Cafe is already a favorite, so remove it
+                    connection.query(
+                        'DELETE FROM favorites WHERE user_id = ? AND cafe_id = ?',
+                        [userId, cafeId],
+                        (deleteErr) => {
+                            if (deleteErr) {
+                                console.error(deleteErr);
+                                return res.status(500).send('Internal Server Error');
+                            }
+                            res.send({message: 'Cafe removed from favorites'});
                         }
-                        res.send({ message: 'Cafe removed from favorites' });
-                    }
-                );
-            } else {
-                // Cafe is not a favorite, so add it
-                connection.query(
-                    'INSERT INTO favorites (user_id, cafe_id) VALUES (?, ?)',
-                    [userId, cafeId],
-                    (insertErr) => {
-                        if (insertErr) {
-                            console.error(insertErr);
-                            return res.status(500).send('Internal Server Error');
+                    );
+                } else {
+                    // Cafe is not a favorite, so add it
+                    connection.query(
+                        'INSERT INTO favorites (user_id, cafe_id) VALUES (?, ?)',
+                        [userId, cafeId],
+                        (insertErr) => {
+                            if (insertErr) {
+                                console.error(insertErr);
+                                return res.status(500).send('Internal Server Error');
+                            }
+                            res.send({message: 'Cafe added to favorites'});
                         }
-                        res.send({ message: 'Cafe added to favorites' });
-                    }
-                );
+                    );
+                }
             }
-        }
-    );
-});
-
-
-
-
-
-app.get('/cafes', (req, res) => {
-    let city_request = ""
-    let wifi_request = ""
-    let food_request = ""
-
-    if (req.query.city !== "Alle byer") city_request = req.query.city
-    if (req.query.wifi !== undefined) wifi_request = req.query.wifi
-    if (req.query.food !== undefined) food_request = req.query.food
-
-    connection.query('SELECT * FROM cafes where city LIKE ? AND wifi LIKE ? AND serve_food LIKE ?',[city_request+"%", wifi_request+"%", food_request+"%"], (error, results, fields) => {
-        if (error) {
-            console.error(error);
-            res.status(500).send('Internal Server Error');
-            return;
-        }
-        res.send(results);
+        );
     });
-});
 
 
 
+    app.get('/cafes', (req, res) => {
+        let city_request = ""
+        let wifi_request = ""
+        let food_request = ""
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-});
+        if (req.query.city !== "Alle byer") city_request = req.query.city
+        if (req.query.wifi !== undefined) wifi_request = req.query.wifi
+        if (req.query.food !== undefined) food_request = req.query.food
+
+        connection.query('SELECT * FROM cafes where city LIKE ? AND wifi LIKE ? AND serve_food LIKE ?', [city_request + "%", wifi_request + "%", food_request + "%"], (error, results, fields) => {
+            if (error) {
+                console.error(error);
+                res.status(500).send('Internal Server Error');
+                return;
+            }
+            res.send(results);
+        });
+    });
+
+
+    app.listen(port, () => {
+        console.log(`Server is running on port ${port}`);
+    });
+
 
 
 
